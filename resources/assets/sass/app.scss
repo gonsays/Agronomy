@@ -1,0 +1,32 @@
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "variables";
+
+*{
+  font-family: 'Lato', sans-serif;
+}
+
+.btn{
+  border-radius: 0;
+  transition: all .3s ease;
+}
+
+.form-control{
+  border-radius: 0;
+}
+
+.shadow{
+  box-shadow: black 0 5px 20px 5px;
+}
+
+.login-container{
+  margin-top: 150px;
+  background: transparentize(white, .2);
+  padding: 20px;
+}
+
+.signup-container{
+  margin-top: 100px;
+  background: transparentize(white, .2);
+  padding: 20px;
+  margin-bottom: 150px;
+}
