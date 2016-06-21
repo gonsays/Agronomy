@@ -2,9 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Auction;
+use App\Product;
+use Auth;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+
+//todo datepicker
+//todo location
+//todo add address table
 
 class AuctionController extends Controller
 {
@@ -15,7 +22,8 @@ class AuctionController extends Controller
      */
     public function index()
     {
-        //
+        $auctionList = Auction::all();
+        return view('auction.index')->with('auctionList', $auctionList);
     }
 
     /**
@@ -25,7 +33,8 @@ class AuctionController extends Controller
      */
     public function create()
     {
-        return view('auction.create');
+        $products = Product::all()->pluck('name','id');
+        return view('auction.create')->with('products', $products);
     }
 
     /**
@@ -36,7 +45,25 @@ class AuctionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dump($request->all());
+
+        $this->validate($request, [
+            'product_id' => 'required|integer|exists:products,id',
+            'quantity' => 'required|numeric|min:10',
+            'base_price' => 'required|numeric',
+            'location' => 'required|string',
+            'bidding_end' => 'required|date|after:today',
+        ]);
+
+        $auction = new Auction();
+        $auction->product_id = $request->get('product_id');
+        $auction->base_price = $request->get('base_price');
+        $auction->location = $request->get('location');
+        $auction->bidding_end = $request->get('bidding_end');
+        $auction->seller_id = Auth::id();
+        $auction->quantity = $request->get("quantity.value").$request->get("quantity.scale");
+        $auction->save();
+        return redirect()->action("AuctionController@show",$auction)->with('message','Auction Successfully Created');
     }
 
     /**
@@ -47,7 +74,8 @@ class AuctionController extends Controller
      */
     public function show($id)
     {
-        //
+        $auction = Auction::find($id);
+        return view('auction.show')->with(['auction'=>$auction]);
     }
 
     /**

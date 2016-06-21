@@ -10,10 +10,10 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            <a href="{{ route('auction.create') }}" class="btn btn-lg btn-primary btn-block">Start an Auction</a>
+                            <a href="{{ action('AuctionController@create') }}" class="btn btn-lg btn-primary btn-block">Start an Auction</a>
                         </div>
                         <div class="col-lg-6">
-                            <a href="" class="btn btn-lg btn-primary btn-block">Browse Auctions</a>
+                            <a href="{{ action('AuctionController@index') }}" class="btn btn-lg btn-primary btn-block">Browse Auctions</a>
                         </div>
                     </div>
                 </div>

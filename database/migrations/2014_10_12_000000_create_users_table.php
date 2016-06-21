@@ -20,9 +20,9 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->string('phone')->unique();
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->string('username')->unique();
-            $table->string('image')->unique();
+            $table->string('image')->unique()->nullable();
         });
     }
 

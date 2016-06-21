@@ -15,7 +15,6 @@ class MakeUserFieldsNullable extends Migration
         Schema::table('users', function (Blueprint $table){
             $table->string('address')->nullable()->change();
             $table->string('image')->nullable()->change();
-            $table->string('name')->nullable()->change();
         });
     }
 
@@ -24,10 +23,12 @@ class MakeUserFieldsNullable extends Migration
      *
      * @param Blueprint $table
      */
-    public function down(Blueprint $table)
+    public function down()
     {
-        $table->string('address')->change();
-        $table->string('image')->change();
-        $table->string('name')->change();
+        Schema::table('users', function (Blueprint $table){
+            $table->string('address')->change();
+            $table->string('image')->change();
+            $table->string('name')->change();
+        });
     }
 }

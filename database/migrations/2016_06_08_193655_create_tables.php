@@ -15,8 +15,9 @@ class CreateTables extends Migration
         Schema::create('products',function (Blueprint $table){
             $table->increments('id');
             $table->string("name")->unique();
-            $table->string("type");
-            $table->string("image");
+            $table->string("type")->nullable();
+            $table->string("image")->nullable();
+            $table->string("measurement_unit");
             $table->timestamps();
         } );
 
@@ -60,8 +61,8 @@ class CreateTables extends Migration
      */
     public function down()
     {
-        Schema::drop('products');
-        Schema::drop('auctions');
         Schema::drop('bids');
+        Schema::drop('auctions');
+        Schema::drop('products');
     }
 }
