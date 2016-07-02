@@ -24,7 +24,12 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function auction(){
+    public function auctions(){
         return $this->hasMany('App\Auction');
+    }
+
+    public function isAdmin()
+    {
+        return $this->admin;
     }
 }

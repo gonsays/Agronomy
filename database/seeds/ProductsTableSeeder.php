@@ -1,6 +1,5 @@
 <?php
 
-use App\Product;
 use Illuminate\Database\Seeder;
 
 class ProductsTableSeeder extends Seeder
@@ -12,14 +11,17 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('products')->insert(
-            [
-                ['name' => 'Rice','measurement_unit'=>'Kg'],
-                ['name' => 'Wheat','measurement_unit'=>'Kg'],
-                ['name' => 'Cauliflower','measurement_unit'=>'Kg'],
-                ['name' => 'Cabbage','measurement_unit'=>'Kg'],
-                ['name' => 'Papaya','measurement_unit'=>'Pc'],
-            ]
-        );
+        $file = File::get('database/seeds/products_list.txt');
+        $products = explode("\n",$file);
+
+
+        foreach ($products as $product){
+            DB::table('products')->insert(
+                [
+                    'name' => $product,
+                    'measurement_unit' => "Kg"
+                ]
+            );
+        }
     }
 }

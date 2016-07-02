@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    public function auction(){
+    public function auctions(){
         return $this->hasMany('App\Auction');
+    }
+    
+    public function varieties(){
+        return $this->hasMany('App\Variety');
     }
 }

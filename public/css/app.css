@@ -28,4 +28,10 @@
 .danger {
   color: darkred; }
 
+.form-control[readonly] {
+  background: white; }
+
+.pointer {
+  cursor: pointer; }
+
 /*# sourceMappingURL=app.css.map */

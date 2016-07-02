@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Auction;
 use App\Product;
 use Auth;
+//use DebugBar\DebugBar;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -12,9 +13,16 @@ use App\Http\Requests;
 //todo datepicker
 //todo location
 //todo add address table
+//todo add cursor to button
+//todo chnage readonly style
 
 class AuctionController extends Controller
 {
+
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -33,7 +41,8 @@ class AuctionController extends Controller
      */
     public function create()
     {
-        $products = Product::all()->pluck('name','id');
+        $products = Product::all(['id','name'])->pluck('name','id');
+//        Debugbar::info($products);
         return view('auction.create')->with('products', $products);
     }
 

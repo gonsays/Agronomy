@@ -21,6 +21,32 @@
     </script>
 
     <script type="text/javascript">
+
+        var varietySelectElement = $("#variety_id");
+        $("#product_id").change(function (e) {
+
+            $.get('{{ action('VarietyController@getVarieties') }}/'+e.target.value,function (data) {
+
+                for(var item in data){
+                    if(data.hasOwnProperty(item)){
+                        let optionElement = document.createElement("option");
+                        optionElement.value = data[item];
+                        optionElement.innerText = item;
+                        varietySelectElement.append(optionElement);
+                    }
+                }
+
+                if($.isEmptyObject(data))
+                    varietySelectElement.attr('disabled','disabled');
+                else
+                    varietySelectElement.removeAttr('disabled');
+
+                varietySelectElement.selectpicker('refresh');
+            })
+        });
+    </script>
+
+    <script type="text/javascript">
         function getLocation() {
             var geocoder = new google.maps.Geocoder;
             var locationElement = document.getElementById('location');
@@ -62,6 +88,7 @@
 
 @section('content')
 
+
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
@@ -76,12 +103,28 @@
                             <div class="form-group {{ $errors->has('product_id') ?'has-errors':'' }}">
                                 <label for="product_id">Crop</label>
 
-                                {{ Form::select('crop',$products,null,['class'=>'selectpicker form-control','data-live-search'=>'true','name'=> 'product_id']) }}
+                                {{ Form::select('name',$products,null,['class'=>'selectpicker form-control',
+                                'data-live-search'=>'true','name'=> 'product_id','id'=>'product_id']) }}
 
                                 @if($errors->has('product_id'))
                                     <span class="help-block danger">
                                         <strong>{{$errors->first('product_id')}}</strong>
                                     </span>
+                                @endif
+                            </div>
+
+                            {{--Variety--}}
+                            <div class="form-group {{ $errors->has('variety_id') ?'has-errors':'' }}">
+                                <label for="variety_id">Variety</label>
+
+                                <select name="variety_id" id="variety_id" class="form-control selectpicker" data-live-search="true" disabled>
+                                    
+                                </select>
+
+                                @if($errors->has('variety_id'))
+                                    <span class="help-block danger">
+                                            <strong>{{$errors->first('variety_id')}}</strong>
+                                        </span>
                                 @endif
                             </div>
 
@@ -102,7 +145,7 @@
                             <div class="form-group {{ $errors->has('base_price') ?'has-errors':'' }}">
                                 <label for="base_price">Base Price</label>
                                 <input type="number" min="0" name="base_price" class="form-control" id="base_price" value="{{ old('base_price')?old('base_price'):0 }}" placeholder="Enter Price">
-
+                                <small>Per Kg</small>
                                 @if($errors->has('base_price'))
                                     <span class="help-block danger">
                                         <strong>{{$errors->first('base_price')}}</strong>
@@ -116,8 +159,8 @@
 
                                  <div class="input-group changethisone">
                                     <input type="text" name="location" class="form-control" id="location" value="{{ old('location') }}">
-                                    <span class="input-group-addon" onclick="getLocation()">
-                                        <i class="glyphicon glyphicon-record"></i>
+                                    <span class="input-group-addon pointer" onclick="getLocation()">
+                                        <i class="glyphicon glyphicon-record "></i>
                                     </span>
                                 </div>
 
@@ -134,7 +177,7 @@
 
                                 <div class='input-group date' id='datetimepicker'>
                                     <input data-provide="datepicker" readonly type='text' name="bidding_end" class="form-control" id="bidding_end" value="{{ old('bidding_end') }}" placeholder="Enter Date"/>
-                                    <span class="input-group-addon">
+                                    <span class="input-group-addon pointer">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>

@@ -16,4 +16,7 @@ Route::get('/', function () {
 });
 Route::auth();
 Route::get('/home', 'HomeController@index');
+Route::get('/adminPanel','AdminPanelController@home');
+
+Route::get('varieties/getvarieties/{id?}','VarietyController@getVarieties');
 Route::resource('auction', 'AuctionController');

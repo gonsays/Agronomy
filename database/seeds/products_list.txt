@@ -1,0 +1,61 @@
+Apple
+Apricot
+Asparagus
+Aubergine
+Avocado
+Banana
+Beetroot
+Black-eye bean
+Broad bean
+Broccoli
+Brussels sprout
+Butternut Squash
+Carrot
+Cherry
+Clementine
+Courgette
+Date
+Elderberry
+Endive
+Fennel
+Fig
+Garlic
+Grape
+Green bean
+Guava
+Haricot bean
+Honeydew melon
+Iceberg lettuce
+Jerusalem artichoke
+Kiwi fruit
+Leek
+Lemon
+Mango
+Melon
+Mushroom
+Nectarine
+Nut
+Olive
+Orange
+Pea
+Peanut
+Pear
+Pepper
+Pineapple
+Pumpkin
+Quince
+Radish
+Raisin
+Rhubarb
+Satsuma
+Strawberry
+Sweet potato
+Tomato
+Turnip
+Ugli fruit
+Victoria plum
+Vine leaf
+Watercress
+Watermelon
+Yam
+Zucchini
