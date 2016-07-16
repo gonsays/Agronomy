@@ -54,7 +54,6 @@ class AuctionController extends Controller
      */
     public function store(Request $request)
     {
-        dump($request->all());
 
         $this->validate($request, [
             'product_id' => 'required|integer|exists:products,id',
@@ -75,6 +74,7 @@ class AuctionController extends Controller
         return redirect()->action("AuctionController@show",$auction)->with('message','Auction Successfully Created');
     }
 
+    //todo remove online dependencies make all local bower
     /**
      * Display the specified resource.
      *
