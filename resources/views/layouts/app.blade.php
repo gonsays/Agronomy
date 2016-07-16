@@ -30,8 +30,6 @@
     @yield('head')
 </head>
 
-    {{ dump($errors) }}
-
 <body id="app-layout">
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
