@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('head')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@stop
+
 @section('content')
 <div class="container">
     <div class="row">

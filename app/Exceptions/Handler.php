@@ -43,8 +43,10 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $e
      * @return \Illuminate\Http\Response
      */
+
     public function render($request, Exception $e)
     {
+//        \Inspector::renderException($e);    // <= THIS LINE
         return parent::render($request, $e);
     }
 }

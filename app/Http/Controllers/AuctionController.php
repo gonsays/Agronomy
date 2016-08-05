@@ -42,7 +42,6 @@ class AuctionController extends Controller
     public function create()
     {
         $products = Product::all(['id','name'])->pluck('name','id');
-//        Debugbar::info($products);
         return view('auction.create')->with('products', $products);
     }
 

@@ -20,3 +20,4 @@ Route::get('/adminPanel','AdminPanelController@home');
 
 Route::get('varieties/getvarieties/{id?}','VarietyController@getVarieties');
 Route::resource('auction', 'AuctionController');
+Route::resource('products', 'ProductController');

@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="col-md-10">
-                {{ Form::open(['action'=>'AuctionController@store']) }}
+                {{ Form::open(['action'=>'ProductController@store']) }}
                     <h2>Add a Product</h2>
                     <hr>
 
@@ -38,14 +38,14 @@
                     </div>
 
                     {{--Crop Type--}}
-                    <div class="form-group {{ $errors->has('name') ?'has-errors':'' }}">
+                    <div class="form-group {{ $errors->has('type') ?'has-errors':'' }}">
                         <label for="type">Type</label>
                         <select name="type" id="type" class="form-control">
-                            <option value="">Vegetable</option>
-                            <option value="">Fruit</option>
-                            <option value="">Spice</option>
-                            <option value="">Grain</option>
-                            <option value="">Drink</option>
+                            <option value="Vegetable">Vegetable</option>
+                            <option value="Fruit">Fruit</option>
+                            <option value="Spice">Spice</option>
+                            <option value="Grain">Grain</option>
+                            <option value="Drink">Drink</option>
                         </select>
 
                         @if($errors->has('type'))
@@ -103,15 +103,15 @@
 @section('scripts')
     <script type="text/javascript">
         var list = $('#list_varieties');
-        let inputBox = $('#add_varieties');
+        var inputBox = $('#add_varieties');
         $('#btn_add_varieties').click(function (e) {
             e.preventDefault();
-            let value = inputBox.val();
+            var value = inputBox.val();
             if(String.trim(value)== "")
                     return false;
 
 
-            let li = document.createElement('li');
+            var li = document.createElement('li');
             li.className = "list-group-item";
             li.innerText = value;
             list.append(li);

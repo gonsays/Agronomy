@@ -60,7 +60,7 @@
                     geocoder.geocode({'location': latlng}, function(results, status) {
                         if (status === google.maps.GeocoderStatus.OK) {
                             if (results[1]) {
-                                locationElement.value = results[1].formatted_address;
+                                locationElement.value = results[0].formatted_address;
                             }
                         }
                     });

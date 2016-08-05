@@ -51,13 +51,19 @@ class ProductController extends Controller
         $product->measurement_unit = 'kg';
         $product->save();
 
-        $varieties = explode($request->get('varieties'),',');
+        $varietiesRaw = $request->get('varieties');
+        $varieties = explode($varietiesRaw,',');
+        $varietyModel = new Variety();
 
-        //loop varieties an insert
-        foreach ($varieties as $variety){
-            $product->varieties()->save($variety);
+        if(strpos($varietiesRaw, ',')) {
+            foreach ($varieties as $variety){ //loop varieties an insert
+                $varietyModel->name = $variety;
+                $product->varieties()->save($variety);
+            }
+        }else{
+            $varietyModel->name = $varietiesRaw;
+            $product->varieties()->save($varietyModel);
         }
-        
         
     }
 
