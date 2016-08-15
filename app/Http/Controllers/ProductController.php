@@ -38,30 +38,43 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
+        $imagesDirectory['products'] = base_path()."/images/products/";
+
         $this->validate($request, [
-            'name' => 'string|required',
+            'name' => 'string|required|unique:products',
             'type' => 'string|required',
-            'image' => 'string',
+            'image' => 'image',
         ]);
+
+        $image = $request->file('image');
+        $image->move($imagesDirectory['products'],$image->getClientOriginalName());
+
+
 
         $product = new Product();
         $product->name = $request->get('name');
         $product->type = $request->get('type');
-        $product->image = $request->get('image');
+        $product->image = $imagesDirectory['products'].$image->getClientOriginalName();
         $product->measurement_unit = 'kg';
         $product->save();
 
-        $varietiesRaw = $request->get('varieties');
-        $varieties = explode($varietiesRaw,',');
+        $varietiesString = $request->get('varieties');
         $varietyModel = new Variety();
+//        dump($varietiesRaw);
 
-        if(strpos($varietiesRaw, ',')) {
-            foreach ($varieties as $variety){ //loop varieties an insert
+        dump($request->all());
+        dump($product);
+
+        if(strpos($varietiesString, ',') != false) {
+            $varietiesArray = explode($varietiesString,',');
+
+            foreach ($varietiesArray as $variety){ //loop varieties an insert
                 $varietyModel->name = $variety;
-                $product->varieties()->save($variety);
+                $product->varieties()->save($varietyModel);
             }
         }else{
-            $varietyModel->name = $varietiesRaw;
+            $varietyModel->name = $varietiesString;
             $product->varieties()->save($varietyModel);
         }
         

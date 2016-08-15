@@ -19,7 +19,8 @@ class ProductsTableSeeder extends Seeder
             DB::table('products')->insert(
                 [
                     'name' => $product,
-                    'measurement_unit' => "Kg"
+                    'measurement_unit' => "Kg",
+                    "type" => "Fruit"
                 ]
             );
         }

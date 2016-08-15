@@ -1,3 +1,54 @@
+.navbar-default {
+  box-shadow: #bfbfbf 0 3px 5px;
+  position: relative;
+  z-index: 99; }
+  .navbar-default .logo {
+    width: 200px;
+    height: 55px;
+    display: inline-block;
+    background: url("/img/logo.png") no-repeat center/contain; }
+  .navbar-default .menu {
+    padding: 10px 0; }
+    .navbar-default .menu .btn {
+      width: 100px;
+      border-radius: 20px;
+      border-color: transparent;
+      font-family: 'Open Sans', sans-serif;
+      margin-left: 10px; }
+      .navbar-default .menu .btn.btn-default {
+        background: #e6e6e6; }
+        .navbar-default .menu .btn.btn-default:hover {
+          background: #d9d9d9; }
+
+.cover {
+  background: url("/img/cover.png") no-repeat bottom/cover;
+  height: 300px;
+  z-index: -999; }
+  .cover .cloud {
+    width: 300px;
+    height: 180px;
+    margin-top: 20px;
+    background: url("/img/cloud.png") no-repeat;
+    background-size: contain;
+    transform: rotate(-20deg);
+    animation: cloud-animate 2s linear infinite;
+    animation-direction: alternate-reverse; }
+
+.container_search {
+  box-shadow: #999999 0 -3px 10px;
+  position: relative;
+  z-index: 99; }
+  .container_search .form-container {
+    background-color: #fff;
+    box-shadow: #cccccc 0 5px 5px;
+    padding: 20px; }
+
+@keyframes cloud-animate {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(-20deg); } }
+
 * {
   font-family: 'Lato', sans-serif; }
 

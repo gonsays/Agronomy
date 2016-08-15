@@ -57,7 +57,7 @@ class AuctionController extends Controller
         $this->validate($request, [
             'product_id' => 'required|integer|exists:products,id',
             'quantity' => 'required|numeric|min:10',
-            'base_price' => 'required|numeric',
+            'base_price' => 'required|numeric|min:10',
             'location' => 'required|string',
             'bidding_end' => 'required|date|after:today',
         ]);

@@ -144,7 +144,7 @@
                             {{--Base Price--}}
                             <div class="form-group {{ $errors->has('base_price') ?'has-errors':'' }}">
                                 <label for="base_price">Base Price</label>
-                                <input type="number" min="0" name="base_price" class="form-control" id="base_price" value="{{ old('base_price')?old('base_price'):0 }}" placeholder="Enter Price">
+                                <input type="number" min="10" name="base_price" class="form-control" id="base_price" value="{{ old('base_price')?old('base_price'):0 }}" placeholder="Enter Price">
                                 <small>Per Kg</small>
                                 @if($errors->has('base_price'))
                                     <span class="help-block danger">

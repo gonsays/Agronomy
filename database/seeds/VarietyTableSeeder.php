@@ -21,8 +21,7 @@ class VarietyTableSeeder extends Seeder
         foreach ($variety_list as $item){
             $variety = new Variety();
             $variety->name = $item;
-            $variety->product();
-            $product->varieties()->save($product);
+            $product->varieties()->save($variety);
             $variety->save();
         }
         
