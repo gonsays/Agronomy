@@ -1,8 +1,9 @@
-.navbar-default{
+.nav-agronomy{
 
   box-shadow: darken(white,25) 0 3px 5px;
   position: relative;
   z-index: 99;
+  margin-bottom: 30px;
 
   .logo{
     width: 200px;
@@ -15,7 +16,6 @@
     padding: 10px 0;
 
     .btn{
-      width: 100px;
       border-radius: 20px;
       border-color: transparent;
       font-family: 'Open Sans', sans-serif;
@@ -44,8 +44,8 @@
     background: url("/img/cloud.png") no-repeat;
     background-size: contain;
     transform: rotate(-20deg);
-    animation: cloud-animate 2s linear infinite;
-    animation-direction: alternate-reverse;
+    //animation: cloud-animate 2s linear infinite;
+    //animation-direction: alternate-reverse;
   }
 
 }

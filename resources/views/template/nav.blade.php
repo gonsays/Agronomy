@@ -1,48 +1,27 @@
-<nav class="navbar navbar-default navbar-static-top">
-    <div class="container">
-        <div class="navbar-header">
+{{--Nav Bar--}}
+<div class="nav navbar-default nav-agronomy">
+    <div class="row">
+        <div class="small-12 columns">
+            <div>
+                <a class="logo" href="{{ action('HomeController@index') }}"></a>
+                <div class="menu float-right">
+                    @if(Auth::check())
+                        <span>{{Auth::user()->getAttribute('name') }}</span>
 
-            <!-- Collapsed Hamburger -->
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                <span class="sr-only">Toggle Navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+                        @if(Auth::user()->isAdmin())
+                            <a href="{{ action('AdminPanelController@home') }}" class="btn btn-default">Admin Panel</a>
+                        @endif
 
-            <!-- Branding Image -->
-            <a class="navbar-brand" href="{{ url('/') }}">
-                Agronomy
-            </a>
-        </div>
+                        <a href="{{ action('Auth\AuthController@logout') }}" class="btn btn-default">Logout</a>
+                    @else
+                        <a href="{{ action('Auth\AuthController@register') }}" class="btn btn-success">Register</a>
+                        <a href="{{ action('Auth\AuthController@login') }}" class="btn btn-default">Login</a>
+                    @endif
 
-        <div class="collapse navbar-collapse" id="app-navbar-collapse">
-            <!-- Left Side Of Navbar -->
-            <ul class="nav navbar-nav">
-                <li><a href="{{ url('/home') }}">Home</a></li>
-            </ul>
-
-            <!-- Right Side Of Navbar -->
-            <ul class="nav navbar-nav navbar-right">
-                <!-- Authentication Links -->
-                @if (Auth::guest())
-                    <li><a href="{{ url('/login') }}">Login</a></li>
-                    <li><a href="{{ url('/register') }}">Register</a></li>
-                @else
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->name }} <span class="caret"></span>
-                        </a>
-
-                        <ul class="dropdown-menu" role="menu">
-                            @if(Auth::user()->isAdmin())
-                                <li><a href="{{ url('/adminPanel') }}"><i class="fa fa-btn"></i>Admin Panel</a></li>
-                            @endif
-                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-                        </ul>
-                    </li>
-                @endif
-            </ul>
+                </div>
+            </div>
         </div>
     </div>
-</nav>
+
+    <div class="nav-shadow"></div>
+</div>

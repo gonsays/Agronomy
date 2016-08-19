@@ -1,23 +1,23 @@
-.navbar-default {
+.nav-agronomy {
   box-shadow: #bfbfbf 0 3px 5px;
   position: relative;
-  z-index: 99; }
-  .navbar-default .logo {
+  z-index: 99;
+  margin-bottom: 30px; }
+  .nav-agronomy .logo {
     width: 200px;
     height: 55px;
     display: inline-block;
     background: url("/img/logo.png") no-repeat center/contain; }
-  .navbar-default .menu {
+  .nav-agronomy .menu {
     padding: 10px 0; }
-    .navbar-default .menu .btn {
-      width: 100px;
+    .nav-agronomy .menu .btn {
       border-radius: 20px;
       border-color: transparent;
       font-family: 'Open Sans', sans-serif;
       margin-left: 10px; }
-      .navbar-default .menu .btn.btn-default {
+      .nav-agronomy .menu .btn.btn-default {
         background: #e6e6e6; }
-        .navbar-default .menu .btn.btn-default:hover {
+        .nav-agronomy .menu .btn.btn-default:hover {
           background: #d9d9d9; }
 
 .cover {
@@ -30,9 +30,7 @@
     margin-top: 20px;
     background: url("/img/cloud.png") no-repeat;
     background-size: contain;
-    transform: rotate(-20deg);
-    animation: cloud-animate 2s linear infinite;
-    animation-direction: alternate-reverse; }
+    transform: rotate(-20deg); }
 
 .container_search {
   box-shadow: #999999 0 -3px 10px;
