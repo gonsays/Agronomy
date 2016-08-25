@@ -159,7 +159,7 @@
 
                                  <div class="input-group changethisone">
                                     <input type="text" name="location" class="form-control" id="location" value="{{ old('location') }}">
-                                    <span class="input-group-addon pointer" onclick="getLocation()">
+                                    <span class="input-group-addon pointer" onclick="gelocation()">
                                         <i class="glyphicon glyphicon-record "></i>
                                     </span>
                                 </div>

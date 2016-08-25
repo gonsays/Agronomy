@@ -22,10 +22,35 @@
 
                         <div class="columns small-3">
                             <select name="" id="" class="form-control">
-                                <option value="">Bangalore</option>
+                                <option value="">Andhra Pradesh</option>
+                                <option value="">Arunachal Pradesh</option>
+                                <option value="">Assam</option>
+                                <option value="">Bihar</option>
+                                <option value="">Chhattisgarh</option>
                                 <option value="">Goa</option>
-                                <option value="">Pune</option>
-                                <option value="">Mumbai</option>
+                                <option value="">Gujarat</option>
+                                <option value="">Haryana</option>
+                                <option value="">Himachal Pradesh</option>
+                                <option value="">Jammu & Kashmir</option>
+                                <option value="">Jharkhand</option>
+                                <option value="">Karnataka</option>
+                                <option value="">Kerala</option>
+                                <option value="">Madhya Pradesh</option>
+                                <option value="">Maharashtra</option>
+                                <option value="">Manipur</option>
+                                <option value="">Meghalaya</option>
+                                <option value="">Mizoram</option>
+                                <option value="">Nagaland</option>
+                                <option value="">Odisha</option>
+                                <option value="">Punjab</option>
+                                <option value="">Rajasthan</option>
+                                <option value="">Sikkim</option>
+                                <option value="">Tamil Nadu</option>
+                                <option value="">Telangana</option>
+                                <option value="">Tripura</option>
+                                <option value="">Uttar Pradesh</option>
+                                <option value="">Uttarakhand</option>
+                                <option value="">West Bengal</option>
                             </select>
                         </div>
                         <div class="columns small-7">
