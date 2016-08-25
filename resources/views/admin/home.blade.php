@@ -1,31 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('head')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker.min.css">
 @stop
 
-@section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-2">
-                <div class="list-group">
-                    <a href="#" class="list-group-item active">
-                        Add a Product
-                    </a>
-                    <a href="#" class="list-group-item">Products List</a>
-                    <a href="#" class="list-group-item">View Stats</a>
-                    <a href="#" class="list-group-item">Check Users</a>
-                    <a href="#" class="list-group-item">Orders</a>
-
-                </div>
-            </div>
-            <div class="col-md-10">
-                @include('product.templates.form')
-            </div>
-        </div>
-    </div>
-
+@section('body')
+        @include('product.templates.create')
 @stop
 
 @section('scripts')

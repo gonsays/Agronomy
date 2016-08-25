@@ -53,9 +53,14 @@
     <div class="form-group {{ $errors->has('image') ?'has-errors':'' }}">
         <label for="add_varieties">Varieties</label>
         <input type="hidden" name="varieties" id="varieties">
-        <input type="text"  id="add_varieties" class="form-control" placeholder="Add Varieties">
-
-        <button class="btn btn-md btn-primary" id="btn_add_varieties">Add</button>
+        <div class="row">
+            <div class="columns small-8">
+                <input type="text"  id="add_varieties" class="form-control" placeholder="Add Varieties">
+            </div>
+            <div class="columns small-4">
+                <button class="btn btn-md btn-primary" id="btn_add_varieties">Add</button>
+            </div>
+        </div>
 
         <ul class="list-group" id="list_varieties">
 

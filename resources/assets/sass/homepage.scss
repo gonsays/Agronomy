@@ -3,7 +3,7 @@
   box-shadow: darken(white,25) 0 3px 5px;
   position: relative;
   z-index: 99;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 
   .logo{
     width: 200px;
@@ -54,11 +54,17 @@
   box-shadow: darken(white,40) 0 -3px 10px;
   position: relative;
   z-index: 99;
+  background: url("/img/pattern.jpg");
+  padding: 60px;
 
   .form-container{
     background-color: #fff;
     box-shadow: darken(white,20) 0 5px 5px;
-    padding: 20px;
+    padding: 50px;
+  }
+
+  .btn{
+    width: 100%;
   }
 }
 

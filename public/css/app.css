@@ -2,7 +2,7 @@
   box-shadow: #bfbfbf 0 3px 5px;
   position: relative;
   z-index: 99;
-  margin-bottom: 30px; }
+  margin-bottom: 20px; }
   .nav-agronomy .logo {
     width: 200px;
     height: 55px;
@@ -35,11 +35,15 @@
 .container_search {
   box-shadow: #999999 0 -3px 10px;
   position: relative;
-  z-index: 99; }
+  z-index: 99;
+  background: url("/img/pattern.jpg");
+  padding: 60px; }
   .container_search .form-container {
     background-color: #fff;
     box-shadow: #cccccc 0 5px 5px;
-    padding: 20px; }
+    padding: 50px; }
+  .container_search .btn {
+    width: 100%; }
 
 @keyframes cloud-animate {
   from {
@@ -53,7 +57,11 @@
 .full-width {
   width: 100%; }
 
+.remove-margin {
+  margin-top: -20px; }
+
 .btn {
+  margin: 0 5px;
   border-radius: 0;
   transition: background .3s ease; }
 
@@ -87,5 +95,43 @@
   background: lightgrey;
   padding: 20px;
   margin-bottom: 20px; }
+
+.auction-container {
+  background: #3cb699;
+  padding: 20px; }
+
+.product-image-container, .product-details-container {
+  padding: 15px;
+  background: white;
+  box-shadow: #4d4d4d 0 0 7px; }
+
+.product-amount {
+  width: 100%;
+  padding: 15px;
+  border-radius: 3px;
+  font-weight: bold; }
+  .product-amount.base-price {
+    color: darkslategrey;
+    border: 1px solid darkgray; }
+  .product-amount.highest-bid {
+    color: white;
+    background: dodgerblue;
+    box-shadow: #b3b3b3 0 3px 2px; }
+
+.bidding-container {
+  width: 100%;
+  padding: 20px 0;
+  clear: both;
+  display: inline-block; }
+
+button[data-id=bid_amount] {
+  padding: 15px; }
+
+.btn-bid {
+  border-radius: 3px;
+  padding: 15px;
+  width: 100%;
+  border: none;
+  box-shadow: #b3b3b3 0 3px 1px; }
 
 /*# sourceMappingURL=app.css.map */

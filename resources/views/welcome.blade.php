@@ -3,7 +3,7 @@
 @section('content')
 
         {{--Cover--}}
-        <div class="cover">
+        <div class="cover remove-margin">
             <div class="row">
                 <div class="columns small-12">
                     <div class="cloud"></div>
@@ -15,28 +15,27 @@
     {{--Search--}}
     <div class="container_search">
         <div class="row">
-            <div class="small-8 columns small-centered">
-                <div class="form-container">
+            <div class="small-12 columns small-centered">
+                <div class="form-container text-center">
                     <h1>Find your Product Instantly!</h1>
-                    <form action="">
-
-                        <div class="columns small-3">
-                            <select name="" id="" class="form-control">
-                                <option value="">Bangalore</option>
-                                <option value="">Goa</option>
-                                <option value="">Pune</option>
-                                <option value="">Mumbai</option>
-                            </select>
+                    <form action="{{ action('ProductController@index') }}" method="post">
+                        <div class="row">
+                            <div class="columns small-5">
+                                <div class="input-group changethisone">
+                                    <input type="text" name="location" class="form-control" id="location" value="{{ old('location') }}">
+                                    <span class="input-group-addon pointer" onclick="getLocation()">
+                                        <i class="glyphicon glyphicon-record "></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="columns small-5">
+                                {{ Form::select('name',$products,null,['class'=>'selectpicker form-control',
+                                'data-live-search'=>'true','name'=> 'product_id','id'=>'product_id']) }}
+                            </div>
+                            <div class="columns small-2">
+                                <input type="submit" value="Search" class="btn btn-success">
+                            </div>
                         </div>
-                        <div class="columns small-7">
-                            <input type="text" placeholder="Search an item" class="form-control">
-                        </div>
-                        <div class="columns small-2">
-                            <input type="submit" value="Search" class="btn btn-success">
-                        </div>
-
-
-
 
                     </form>
                 </div>
@@ -44,3 +43,12 @@
         </div>
     </div>
 @endsection
+
+@section('head')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" type="text/css">
+@stop
+
+@section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+    @include('template.geolocation')
+@stop

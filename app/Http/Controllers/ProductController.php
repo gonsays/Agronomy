@@ -7,6 +7,7 @@ use App\Variety;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Mockery\CountValidator\Exception;
 
 class ProductController extends Controller
 {
@@ -39,7 +40,10 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
-        $imagesDirectory['products'] = base_path()."/images/products/";
+
+        //TODO check if varieties is empty
+        $imagePath = "/images/products/";
+        $imagesDirectory['products'] = base_path().$imagePath;
 
         $this->validate($request, [
             'name' => 'string|required|unique:products',
@@ -57,26 +61,32 @@ class ProductController extends Controller
         $product->type = $request->get('type');
         $product->image = $imagesDirectory['products'].$image->getClientOriginalName();
         $product->measurement_unit = 'kg';
-        $product->save();
 
-        $varietiesString = $request->get('varieties');
-        $varietyModel = new Variety();
-//        dump($varietiesRaw);
+        try{
+            $product->save();
 
-        dump($request->all());
-        dump($product);
+            $varietiesString = $request->get('varieties');
+            $varietyModel = new Variety();
 
-        if(strpos($varietiesString, ',') != false) {
-            $varietiesArray = explode($varietiesString,',');
 
-            foreach ($varietiesArray as $variety){ //loop varieties an insert
-                $varietyModel->name = $variety;
+            if(strpos($varietiesString, ',') != false) {
+                $varietiesArray = explode($varietiesString,',');
+
+                foreach ($varietiesArray as $variety){ //loop varieties an insert
+                    $varietyModel->name = $variety;
+                    $product->varieties()->save($varietyModel);
+                }
+            }else{
+                $varietyModel->name = $varietiesString;
                 $product->varieties()->save($varietyModel);
             }
-        }else{
-            $varietyModel->name = $varietiesString;
-            $product->varieties()->save($varietyModel);
+
+        }catch (Exception $e){
+            return response("Error",500);
         }
+
+
+        return response("Product Successfully Uploaded",200);
         
     }
 

@@ -26,15 +26,6 @@
 
      <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
 
-    <style>
-        body {
-            font-family: 'Lato', sans-serif;
-        }
-
-        .fa-btn {
-            margin-right: 6px;
-        }
-    </style>
 
     @yield('head')
 </head>
@@ -46,6 +37,22 @@
 
 
     @yield('content')
+        
+        
+    
+    {{--<footer>--}}
+        {{--<div class="row">--}}
+            {{--<div class="small-12 columns">--}}
+                {{--<ul class="small-block-grid-5">--}}
+                    {{--<li><a href="">Lorem.</a></li>--}}
+                    {{--<li><a href="">Consequuntur!</a></li>--}}
+                    {{--<li><a href="">Repellendus.</a></li>--}}
+                    {{--<li><a href="">Aliquam?</a></li>--}}
+                    {{--<li><a href="">Nesciunt.</a></li>--}}
+                {{--</ul>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</footer>--}}
 
     <!-- JavaScripts -->
         {{ Html::script('/bower_components/jquery/dist/jquery.min.js') }}

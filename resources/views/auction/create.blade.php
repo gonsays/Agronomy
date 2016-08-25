@@ -9,7 +9,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.min.js"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSuRSONWkdv2Gk7T6G8OEqYNHHarultFw=&libraries=places"></script>
     <script type="text/javascript">
         $(function () {
             $('#datetimepicker').datepicker({
@@ -46,44 +45,9 @@
         });
     </script>
 
-    <script type="text/javascript">
-        function getLocation() {
-            var geocoder = new google.maps.Geocoder;
-            var locationElement = document.getElementById('location');
-            locationElement.disabled = true;
-
-            if (navigator.geolocation)
-                navigator.geolocation.getCurrentPosition(function (position){
-
-                    console.log(position.coords.latitude+ "  " + position.coords.longitude);
-                    var latlng = {lat: position.coords.latitude, lng:  position.coords.longitude};
-                    geocoder.geocode({'location': latlng}, function(results, status) {
-                        if (status === google.maps.GeocoderStatus.OK) {
-                            if (results[1]) {
-                                locationElement.value = results[0].formatted_address;
-                            }
-                        }
-                    });
-                });
-
-            locationElement.disabled = false;
-
-            return false;
-        }
+    @include('template.geolocation')
 
 
-    </script>
-
-    <script type="text/javascript">
-        var options = {
-            types: ['(cities)'],
-            componentRestrictions: {country: 'in'}
-        };
-
-
-        var input = document.getElementById('location');
-        var autocomplete = new google.maps.places.Autocomplete(input, options);
-    </script>
 @stop
 
 @section('content')

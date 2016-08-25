@@ -82,7 +82,7 @@ class AuctionController extends Controller
      */
     public function show($id)
     {
-        $auction = Auction::find($id);
+        $auction = Auction::with('product')->find($id);
         return view('auction.show')->with(['auction'=>$auction]);
     }
 

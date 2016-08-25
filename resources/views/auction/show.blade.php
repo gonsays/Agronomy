@@ -1,59 +1,116 @@
 @extends('layouts.app')
 
+@section('head')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" type="text/css">
+@stop
+
+@section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+@stop
+
 @section('content')
-    <div class="container">
+
         @if(session('message'))
-            <div class="alert alert-primary">
-                {{ session('message') }}
-            </div>
+        <div class="alert alert-primary">
+            {{ session('message') }}
+        </div>
         @endif
 
+        <div class="auction-container remove-margin">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Auction #{{ $auction->id }}</div>
+                <div class="columns small-4">
+                    <div class="product-image-container">
+                        {{--todo fix product image--}}
+                        <img src="http://placehold.it/300x400" alt="">
+                        {{--<img src="{{ $auction->product->image }}" alt="">--}}
+                    </div>
+                </div>
 
-                        <div class="panel-body">
-                            <table class="table">
-                                <tr>
-                                    <td>Product</td>
-                                    <td>{{ $auction->product->name }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Seller Name</td>
-                                    <td>{{ $auction->seller->name }}</td>
-                                </tr>
+                <div class="columns small-8">
+                    <div class="product-details-container">
 
-                                <tr>
-                                    <td>Base Price</td>
-                                    <td>Rs. {{ $auction->base_price }}</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Location</td>
-                                    <td>{{ $auction->location }}</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Status</td>
-                                    <td>{{ $auction->status }}</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Auction ends on</td>
-                                    <td>{{ $auction->bidding_end }}</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Auction Started on</td>
-                                    <td>{{ $auction->created_at }}</td>
-                                </tr>
-                            </table>
+                        <div class="small-12 columns">
+                            <h3>Sweet Merriots Apple</h3>
+                            <h5>Apple</h5>
                         </div>
+
+                        <div class="columns small-4">
+                            <b>Seller</b>
+                            <p>Someperson</p>
+                        </div>
+                        <div class="columns small-4">
+                            <b>Location</b>
+                            <p>Someplace</p>
+                        </div>
+
+                        <div class="columns small-4">
+                            <b>Quantity</b>
+                            <p>25 Kg</p>
+                        </div>
+
+
+                        <div class="small-12 columns">
+                            <b>Description</b>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid consequatur explicabo id
+                                placeat quas rerum sint veritatis vero voluptatem voluptatibus? Ad cumque dolor dolorem
+                                eaque illum iusto magni minus odio quis quo sint suscipit, voluptas?</p>
+                        </div>
+
+                        <div class="small-6 columns">
+                            <div class="product-amount base-price">
+                                <b>Base Price:</b>
+                                Rs. 3600/- per Kg
+                            </div>
+                        </div>
+                        <div class="small-6 columns">
+                            <div class="product-amount highest-bid">
+                                <b>Highest Bid:</b>
+                                Rs. 5000/- per Kg
+                            </div>
+                        </div>
+
+                        <div class="bidding-container">
+                            <div class="small-8 columns">
+                                <select name="bid_amount" id="bid_amount" class="form-control selectpicker" data-live-search="true">
+                                    <option value="">Rs. 3000</option>
+                                    <option value="">Rs. 4000</option>
+                                    <option value="">Rs. 5000</option>
+                                    <option value="">Rs. 6000</option>
+                                </select>
+                            </div>
+
+                            <div class="small-4 columns">
+                                <a class="btn btn-success btn-bid">Make a Bid</a>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
-    </div>
+        </div>
 
+        <div class="bids-view-container">
+            <div class="row">
+                <div class="small-6 columns">
+                    <h1>Recent Bids</h1>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <span class="tag tag-default tag-pill pull-xs-right">14</span>
+                            Cras justo odio
+                        </li>
+                        <li class="list-group-item">
+                            <span class="tag tag-default tag-pill pull-xs-right">2</span>
+                            Dapibus ac facilisis in
+                        </li>
+                        <li class="list-group-item">
+                            <span class="tag tag-default tag-pill pull-xs-right">1</span>
+                            Morbi leo risus
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    {{--todo breadcrumbs--}}
 
 @stop
