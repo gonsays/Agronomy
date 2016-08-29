@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Auction;
 use App\Product;
+use App\Variety;
 use Auth;
 //use DebugBar\DebugBar;
 use Illuminate\Http\Request;
@@ -21,12 +22,12 @@ class AuctionController extends Controller
 
 
     public function __construct(){
-        $this->middleware('auth');
+//        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
@@ -39,10 +40,17 @@ class AuctionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        $products = Product::all(['id','name'])->pluck('name','id');
-        return view('auction.create')->with('products', $products);
+        $varieties = null;
+
+        if($request->has('product_id')) {
+            $product_id = $request->input('product_id');
+            $varieties = Product::find($product_id)->varieties()->get(['id', 'name']);
+        }
+
+        $products = Product::all(['id','name']);
+        return view('auction.create')->with('products', $products)->with('varieties',$varieties);
     }
 
     /**
@@ -55,22 +63,30 @@ class AuctionController extends Controller
     {
 
         $this->validate($request, [
-            'product_id' => 'required|integer|exists:products,id',
+            'variety_id' => 'required|integer|exists:varieties,id',
             'quantity' => 'required|numeric|min:10',
             'base_price' => 'required|numeric|min:10',
             'location' => 'required|string',
-            'bidding_end' => 'required|date|after:today',
+            'bidding_end' => 'required|date_format:Y-m-d|after:today',
+            'description' => 'required'
         ]);
 
         $auction = new Auction();
-        $auction->product_id = $request->get('product_id');
+        $auction->variety_id = $request->get('variety_id');
         $auction->base_price = $request->get('base_price');
+        $auction->description =  $request->get('description');
         $auction->location = $request->get('location');
         $auction->bidding_end = $request->get('bidding_end');
         $auction->seller_id = Auth::id();
-        $auction->quantity = $request->get("quantity.value").$request->get("quantity.scale");
+        $auction->quantity = $request->get("quantity");
         $auction->save();
-        return redirect()->action("AuctionController@show",$auction)->with('message','Auction Successfully Created');
+
+
+
+        $request->session()->flash('status', 'Auction Successfully Created');
+
+        return redirect()->action("AuctionController@show",$auction);
+
     }
 
     //todo remove online dependencies make all local bower
@@ -78,12 +94,16 @@ class AuctionController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function show($id)
     {
-        $auction = Auction::with('product')->find($id);
-        return view('auction.show')->with(['auction'=>$auction]);
+        $auction = Auction::with('variety')->find($id);
+        $bids = $auction->bids;
+        $highestBid = $auction->bids()->max('amount');
+        return view('auction.show')->with('auction',$auction)
+        ->with('highestBid',$highestBid)
+        ->with('bids',$bids);
     }
 
     /**
@@ -118,5 +138,32 @@ class AuctionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search(Request $request){
+        $location=null;
+        $variety_id = null;
+
+        if($request->has('location'))
+            $location = $request->input('location');
+
+        if($request->has('variety_id')){
+            $variety_id = $request->input('variety_id');
+        }
+
+        $messages = [
+           'product_id.required' => 'Please select a Product',
+            'variety_id.required' => 'Please select a valid variety',
+        ];
+
+        $this->validate($request,[
+            'location' => 'required',
+            'product_id' => 'required|exists:products,id',
+            'variety_id' => 'required|exists:varieties,id'
+        ],$messages);
+
+        $auctionList = Auction::where('location','LIKE', '%'.$location.'%')->where('variety_id',$variety_id)->get();
+        return view('auction.index')->with('auctionList', $auctionList);
+
     }
 }

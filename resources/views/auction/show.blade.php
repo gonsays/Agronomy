@@ -10,9 +10,9 @@
 
 @section('content')
 
-        @if(session('message'))
+        @if(session('status'))
         <div class="alert alert-primary">
-            {{ session('message') }}
+            {{ session('status') }}
         </div>
         @endif
 
@@ -21,7 +21,7 @@
                 <div class="columns small-4">
                     <div class="product-image-container">
                         {{--todo fix product image--}}
-                        <img src="http://placehold.it/300x400" alt="">
+                        <img src="/img/red_delicious.jpg" alt="">
                         {{--<img src="{{ $auction->product->image }}" alt="">--}}
                     </div>
                 </div>
@@ -30,42 +30,44 @@
                     <div class="product-details-container">
 
                         <div class="small-12 columns">
-                            <h3>Sweet Merriots Apple</h3>
+                            <h3>{{ $auction->variety->name }}</h3>
                             <h5>Apple</h5>
                         </div>
 
                         <div class="columns small-4">
                             <b>Seller</b>
-                            <p>Someperson</p>
+                            <p>{{ $auction->seller->name }}</p>
                         </div>
                         <div class="columns small-4">
                             <b>Location</b>
-                            <p>Someplace</p>
+                            <p>{{ $auction->location }}</p>
                         </div>
 
                         <div class="columns small-4">
                             <b>Quantity</b>
-                            <p>25 Kg</p>
+                            <p>{{ $auction->quantity }}</p>
                         </div>
 
 
                         <div class="small-12 columns">
                             <b>Description</b>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid consequatur explicabo id
-                                placeat quas rerum sint veritatis vero voluptatem voluptatibus? Ad cumque dolor dolorem
-                                eaque illum iusto magni minus odio quis quo sint suscipit, voluptas?</p>
+                            <p>{{ $auction->description }}</p>
                         </div>
 
                         <div class="small-6 columns">
                             <div class="product-amount base-price">
                                 <b>Base Price:</b>
-                                Rs. 3600/- per Kg
+                                Rs. {{ $auction->base_price }}/- per Kg
                             </div>
                         </div>
                         <div class="small-6 columns">
                             <div class="product-amount highest-bid">
                                 <b>Highest Bid:</b>
-                                Rs. 5000/- per Kg
+                                @if($highestBid)
+                                    Rs. {{ $highestBid }}/- per Kg
+                                @else
+                                    No Bids yet
+                                @endif
                             </div>
                         </div>
 
@@ -92,21 +94,23 @@
         <div class="bids-view-container">
             <div class="row">
                 <div class="small-6 columns">
-                    <h1>Recent Bids</h1>
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <span class="tag tag-default tag-pill pull-xs-right">14</span>
-                            Cras justo odio
-                        </li>
-                        <li class="list-group-item">
-                            <span class="tag tag-default tag-pill pull-xs-right">2</span>
-                            Dapibus ac facilisis in
-                        </li>
-                        <li class="list-group-item">
-                            <span class="tag tag-default tag-pill pull-xs-right">1</span>
-                            Morbi leo risus
-                        </li>
-                    </ul>
+
+
+                    @if($bids->isEmpty())
+                        <h1 class="notification-med">No Bids Yet</h1>
+                        <hr>
+                    @else
+                        <h1>Recent Bids</h1>
+                        <hr>
+                        <ul class="list-group">
+                            @foreach($bids as $bid)
+                                <li class="list-group-item">
+                                    <span class="tag tag-default tag-pill pull-xs-right">{{ $bid->amount }}</span>
+                                    {{ $bid->seller }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
                 </div>
             </div>
         </div>

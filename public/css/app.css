@@ -69,7 +69,7 @@
   border-radius: 0; }
 
 .shadow {
-  box-shadow: black 0 5px 20px 5px; }
+  box-shadow: #404040 0 1px 10px; }
 
 .login-container {
   margin-top: 150px;
@@ -103,7 +103,8 @@
 .product-image-container, .product-details-container {
   padding: 15px;
   background: white;
-  box-shadow: #4d4d4d 0 0 7px; }
+  box-shadow: #4d4d4d 0 0 7px;
+  min-height: 405px; }
 
 .product-amount {
   width: 100%;
@@ -133,5 +134,25 @@ button[data-id=bid_amount] {
   width: 100%;
   border: none;
   box-shadow: #b3b3b3 0 3px 1px; }
+
+.notification-big {
+  font-size: 5em;
+  font-weight: 200; }
+
+.notification-med {
+  font-size: 3em;
+  font-weight: 300; }
+
+.pill {
+  border-radius: 300px;
+  font-size: 3em;
+  font-weight: 200;
+  padding: 7px;
+  width: 50%;
+  display: block;
+  border: none; }
+
+.center {
+  margin: 0 auto; }
 
 /*# sourceMappingURL=app.css.map */

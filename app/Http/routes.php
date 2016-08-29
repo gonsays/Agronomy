@@ -15,7 +15,8 @@ use App\Product;
 
 Route::get('/', function () {
     $products = Product::all(['id','name'])->pluck('name','id');
-    return view('welcome')->with('products',$products);
+    $varieties = Product::first()->varieties()->pluck('name','id');
+    return view('welcome')->with('products',$products)->with('varieties',$varieties);
 });
 Route::auth();
 Route::get('/home', 'HomeController@index');
@@ -23,7 +24,8 @@ Route::get('/adminpanel/product/add',['as' => 'admin.product.add', 'uses' =>'Adm
 Route::get('/adminpanel/product/list',['as' => 'admin.product.list', 'uses' =>'AdminPanelController@productlist']);
 
 Route::get('varieties/getvarieties/{id?}','VarietyController@getVarieties');
-Route::resource('auction', 'AuctionController');
+Route::resource('auctions', 'AuctionController');
+Route::post('auction/search','AuctionController@search');
 Route::resource('products', 'ProductController');
 
 //Route::group(array('domain' => 'admin.localhost'), function(){

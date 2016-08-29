@@ -24,7 +24,7 @@
 }
 
 .shadow{
-  box-shadow: black 0 5px 20px 5px;
+  box-shadow: #404040 0 1px 10px
 }
 
 .login-container{
@@ -67,6 +67,7 @@
   padding: 15px;
   background: white;
   box-shadow: lighten(black,30) 0 0 7px;
+  min-height: 405px;
 }
 
 .product-amount{
@@ -104,4 +105,29 @@ button[data-id=bid_amount]{
   width: 100%;
   border: none;
   box-shadow: darken(white,30) 0 3px 1px;
+}
+
+.notification-big{
+  font-size:5em;
+  font-weight: 200;
+}
+
+.notification-med{
+  font-size: 3em;
+  font-weight: 300;
+}
+
+.pill{
+  border-radius: 300px;
+  font-size: 3em;
+  font-weight: 200;
+  padding:7px;
+  width:50%;
+  display: block;
+  border:none;
+
+}
+
+.center{
+  margin:0 auto;
 }

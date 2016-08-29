@@ -19,31 +19,7 @@
         });
     </script>
 
-    <script type="text/javascript">
-
-        var varietySelectElement = $("#variety_id");
-        $("#product_id").change(function (e) {
-
-            $.get('{{ action('VarietyController@getVarieties') }}/'+e.target.value,function (data) {
-
-                for(var item in data){
-                    if(data.hasOwnProperty(item)){
-                        let optionElement = document.createElement("option");
-                        optionElement.value = data[item];
-                        optionElement.innerText = item;
-                        varietySelectElement.append(optionElement);
-                    }
-                }
-
-                if($.isEmptyObject(data))
-                    varietySelectElement.attr('disabled','disabled');
-                else
-                    varietySelectElement.removeAttr('disabled');
-
-                varietySelectElement.selectpicker('refresh');
-            })
-        });
-    </script>
+    @include('template.update_varieties')
 
     @include('template.geolocation')
 
@@ -65,10 +41,14 @@
 
                             {{--Crop Type--}}
                             <div class="form-group {{ $errors->has('product_id') ?'has-errors':'' }}">
-                                <label for="product_id">Crop</label>
+                                <label for="product_id">Product</label>
 
-                                {{ Form::select('name',$products,null,['class'=>'selectpicker form-control',
-                                'data-live-search'=>'true','name'=> 'product_id','id'=>'product_id']) }}
+                                <select name="product_id" id="product_id" class="form-control selectpicker" data-live-search="true">
+                                    <option value="">Please select a Product</option>
+                                    @foreach($products as $product)
+                                        <option value="{{$product->id}}" {{ old('product_id')==$product->id?'selected':'' }}>{{$product->name}}</option>
+                                    @endforeach
+                                </select>
 
                                 @if($errors->has('product_id'))
                                     <span class="help-block danger">
@@ -81,8 +61,15 @@
                             <div class="form-group {{ $errors->has('variety_id') ?'has-errors':'' }}">
                                 <label for="variety_id">Variety</label>
 
-                                <select name="variety_id" id="variety_id" class="form-control selectpicker" data-live-search="true" disabled>
-                                    
+                                <select name="variety_id" id="variety_id" class="form-control selectpicker" data-live-search="true" {{$varieties?'disabled="disabled"':''}}>
+                                    <option value="" >Please select a variety</option>
+
+                                    @if($varieties)
+                                        @foreach($varieties as $variety)
+                                        <option value="{{$variety->id}}" {{ old('variety_id')==$variety->id?'selected':'' }}>{{$variety->name}}</option>
+                                        @endforeach
+                                    @endif
+
                                 </select>
 
                                 @if($errors->has('variety_id'))
@@ -91,6 +78,20 @@
                                         </span>
                                 @endif
                             </div>
+
+
+                            {{--Description--}}
+                            <div class="form-group {{ $errors->has('description') ?'has-errors':'' }}">
+                                <label for="description">Expected Quantity</label>
+                                <textarea name="description" class="form-control" id="description" cols="30" rows="10" placeholder="Enter Description">{{old('description')}}</textarea>
+
+                                @if($errors->has('description'))
+                                    <span class="help-block danger">
+                                            <strong>{{$errors->first('description')}}</strong>
+                                        </span>
+                                @endif
+                            </div>
+
 
                             {{--Expected Quantity--}}
                             <div class="form-group {{ $errors->has('quantity') ?'has-errors':'' }}">
@@ -108,7 +109,7 @@
                             {{--Base Price--}}
                             <div class="form-group {{ $errors->has('base_price') ?'has-errors':'' }}">
                                 <label for="base_price">Base Price</label>
-                                <input type="number" min="10" name="base_price" class="form-control" id="base_price" value="{{ old('base_price')?old('base_price'):0 }}" placeholder="Enter Price">
+                                <input type="number" min="10" name="base_price" class="form-control" id="base_price" value="{{ old('base_price')?old('base_price'):1000 }}" placeholder="Enter Price">
                                 <small>Per Kg</small>
                                 @if($errors->has('base_price'))
                                     <span class="help-block danger">
