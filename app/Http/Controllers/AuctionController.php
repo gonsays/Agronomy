@@ -100,10 +100,21 @@ class AuctionController extends Controller
     {
         $auction = Auction::with('variety')->find($id);
         $bids = $auction->bids;
+        $suggestedBids = [];
         $highestBid = $auction->bids()->max('amount');
+
+        $bid_start = $highestBid?$highestBid:$auction->base_price;
+
+        for($i=1;$i<=5;$i++){
+            $amt = $bid_start+($bid_start/10*$i);
+            array_push($suggestedBids,$amt);
+        }
+
+
         return view('auction.show')->with('auction',$auction)
-        ->with('highestBid',$highestBid)
-        ->with('bids',$bids);
+            ->with('highestBid',$highestBid)
+            ->with('suggestedBids',$suggestedBids)
+            ->with('bids',$bids);
     }
 
     /**

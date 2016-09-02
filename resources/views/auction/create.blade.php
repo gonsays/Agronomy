@@ -82,7 +82,7 @@
 
                             {{--Description--}}
                             <div class="form-group {{ $errors->has('description') ?'has-errors':'' }}">
-                                <label for="description">Expected Quantity</label>
+                                <label for="description">Description</label>
                                 <textarea name="description" class="form-control" id="description" cols="30" rows="10" placeholder="Enter Description">{{old('description')}}</textarea>
 
                                 @if($errors->has('description'))

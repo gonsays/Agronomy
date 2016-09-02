@@ -14,8 +14,7 @@ class ChangeProductFkToVarietyFkInAuctionTable extends Migration
     {
         Schema::table('auctions',function (Blueprint $table){
             $table->dropForeign('auctions_product_id_foreign');
-            $table->dropColumn('product_id');
-            $table->integer('variety_id');
+            $table->renameColumn('product_id','variety_id');
             $table->foreign('variety_id')->references('id')->on('varieties');
         });
 
@@ -30,9 +29,8 @@ class ChangeProductFkToVarietyFkInAuctionTable extends Migration
     {
         Schema::table('auctions',function (Blueprint $table){
             $table->dropForeign('auctions_variety_id_foreign');
-            $table->dropColumn('variety_id');
-            $table->integer('product_id');
-            $table->foreign('product_id')->references('id')->on('varieties');
+            $table->renameColumn('variety_id','product_id');
+            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 }

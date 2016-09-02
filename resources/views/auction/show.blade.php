@@ -6,6 +6,40 @@
 
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript">
+        var $customBid = $("#input-custom-bid");
+        var $bidAmount = $("#bid_amount");
+        $bidAmount.change(function (e) {
+            if(this.value == "custom" ){
+                $customBid.removeAttr('disabled');
+                $customBid.removeClass("hide");
+                $customBid.show();
+            }
+            else if($customBid.is(":visible")){
+                $customBid.hide();
+                $customBid.attr('disabled','disabled');
+            }
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        var $customBid = $("#input-custom-bid");
+        var $bidAmount = $("#bid_amount");
+        var $formBid = $("#form_bid");
+
+        $formBid.submit(function (e) {
+            e.preventDefault();
+            if($bidAmount.val() == "custom"){
+                var customAmount = $customBid.val();
+                $bidAmount.val(customAmount);
+            }
+            var $data = $(this).serialize();
+            $.post($formBid.attr('action'), {$data}, function (response) {
+                alert(response);
+            })
+        })
+    </script>
 @stop
 
 @section('content')
@@ -71,19 +105,29 @@
                             </div>
                         </div>
 
+                        {{--Bidding Form--}}
                         <div class="bidding-container">
-                            <div class="small-8 columns">
-                                <select name="bid_amount" id="bid_amount" class="form-control selectpicker" data-live-search="true">
-                                    <option value="">Rs. 3000</option>
-                                    <option value="">Rs. 4000</option>
-                                    <option value="">Rs. 5000</option>
-                                    <option value="">Rs. 6000</option>
-                                </select>
-                            </div>
+                            <form action="{{ action("BidController@store") }}" method="post" id="form_bid">
 
-                            <div class="small-4 columns">
-                                <a class="btn btn-success btn-bid">Make a Bid</a>
-                            </div>
+                                <input type="hidden" name="auction_id" value="{{ $auction->id }}">
+
+                                <div class="small-4 columns">
+                                    <select name="bid_amount" id="bid_amount" class="form-control selectpicker" data-live-search="true">
+                                        @foreach($suggestedBids as $amount)
+                                            <option value="${{ $amount }}">Rs. {{ $amount }}</option>
+                                        @endforeach
+                                        <option value="custom">Custom</option>
+                                    </select>
+                                </div>
+
+                                <div class="small-4 columns">
+                                    <input type="text" id="input-custom-bid" class="form-control hide" disabled>
+                                </div>
+
+                                <div class="small-4 columns">
+                                    <input type="submit" value="Make Bid" class="btn btn-success btn-bid">
+                                </div>
+                            </form>
                         </div>
 
                     </div>

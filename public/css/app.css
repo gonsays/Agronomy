@@ -54,6 +54,9 @@
 * {
   font-family: 'Lato', sans-serif; }
 
+.dark-shadow {
+  box-shadow: #1a1a1a 0 5px 5px; }
+
 .full-width {
   width: 100%; }
 
@@ -97,8 +100,9 @@
   margin-bottom: 20px; }
 
 .auction-container {
-  background: #3cb699;
-  padding: 20px; }
+  background: url("/img/Apples_background.jpg");
+  padding: 20px;
+  background-size: contain; }
 
 .product-image-container, .product-details-container {
   padding: 15px;
@@ -154,5 +158,8 @@ button[data-id=bid_amount] {
 
 .center {
   margin: 0 auto; }
+
+#input-custom-bid {
+  padding: 25px 16px; }
 
 /*# sourceMappingURL=app.css.map */

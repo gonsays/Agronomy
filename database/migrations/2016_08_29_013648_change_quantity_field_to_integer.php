@@ -12,11 +12,12 @@ class ChangeQuantityFieldToInteger extends Migration
      */
     public function up()
     {
-        //todo chnage quantity to integer
-        Schema::table('auctions',function (Blueprint $table){
-            $table->dropColumn('quantity')->cascade();
-            $table->integer('quantity');
-        });
+        $sql = "ALTER TABLE \"auctions\" ALTER COLUMN quantity TYPE INTEGER USING quantity::INTEGER ;";
+        DB::statement($sql);
+/*        Schema::table('auctions',function (Blueprint $table){
+//            $table->dropColumn('quantity')->cascade();
+            $table->integer('quantity')->change();
+        });*/
     }
 
     /**
@@ -26,9 +27,11 @@ class ChangeQuantityFieldToInteger extends Migration
      */
     public function down()
     {
-        Schema::table('auctions',function (Blueprint $table){
-            $table->dropColumn('quantity');
-            $table->string('quantity');
-        });
+        $sql = "ALTER TABLE \"auctions\" ALTER COLUMN quantity TYPE VARCHAR(255) USING quantity::VARCHAR ;";
+        DB::statement($sql);
+/*        Schema::table('auctions',function (Blueprint $table){
+//            $table->dropColumn('quantity');
+            $table->string('quantity')->change();
+        });*/
     }
 }
