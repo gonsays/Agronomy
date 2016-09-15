@@ -4,7 +4,7 @@
         <div class="small-12 columns">
             <div>
                 <a class="logo" href="{{ url("/") }}"></a>
-                <div class="menu float-right">
+                <div class="menu right">
                     @if(Auth::check())
 
                         <a href="{{ action('HomeController@index') }}">Home</a>
@@ -13,9 +13,27 @@
                             <a href="{{ action('AdminPanelController@home') }}" class="btn btn-default">Admin Panel</a>
                         @endif
 
-                        <a href="{{ action('Auth\AuthController@logout') }}" class="btn btn-default">Logout</a>
 
-                        <span>{{Auth::user()->getAttribute('name') }}</span>
+
+                        <span>
+
+
+
+                            <div class="dropdown">
+                              <a class="btn btn-default" data-toggle="dropdown">
+                                  {{Auth::user()->getAttribute('name') }}
+                                    <span class="caret"></span>
+                              </a>
+                                
+                              <ul class="dropdown-menu">
+                                  <li><a href="{{ action('AuctionController@myAccount') }}">My Account</a></li>
+                                  <li><a href="{{ action('AuctionController@myAuctions') }}">My Auctions</a></li>
+                                  <li><a href="{{ action('AuctionController@myBids') }}">My Bids</a></li>
+                                  <li><a href="{{ action('Auth\AuthController@logout') }}">Logout</a></li>
+                              </ul>
+                            </div>
+
+                        </span>
                     @else
                         <a href="{{ action('Auth\AuthController@register') }}" class="btn btn-success">Register</a>
                         <a href="{{ action('Auth\AuthController@login') }}" class="btn btn-default">Login</a>

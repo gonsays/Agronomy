@@ -28,8 +28,8 @@
 
     @if($errors->has('type'))
         <span class="help-block danger">
-                                <strong>{{$errors->first('type')}}</strong>
-                            </span>
+            <strong>{{$errors->first('type')}}</strong>
+        </span>
     @endif
 </div>
 

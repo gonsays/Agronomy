@@ -7,12 +7,12 @@
                 </a>
             </div>
             <div class="small-9 columns">
-                <a href="#">
+
                     <h3>{{ $product->name }}</h3>
-                </a>
                     <p>{{ $product->type }}</p>
                     <p>{{ $product->created_at }}</p>
                     <p>{{ $product->updated_at }}</p>
+                    <a href="{{ action("AdminPanelController@editProduct", $product->id) }}">Edit</a>
 
             </div>
         </div>

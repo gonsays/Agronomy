@@ -22,12 +22,18 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 Route::get('/adminpanel/product/add',['as' => 'admin.product.add', 'uses' =>'AdminPanelController@home']);
 Route::get('/adminpanel/product/list',['as' => 'admin.product.list', 'uses' =>'AdminPanelController@productlist']);
+Route::get('/adminpanel/product/edit/{id}',['as' => 'admin.product.edit', 'uses' =>'AdminPanelController@editProduct']);
 
 Route::get('varieties/getvarieties/{id?}','VarietyController@getVarieties');
 Route::resource('auctions', 'AuctionController');
 Route::post('auction/search','AuctionController@search');
 Route::resource('products', 'ProductController');
 Route::resource('bids','BidController');
+
+
+Route::get('my-account','AuctionController@myAccount');
+Route::get('my-auctions','AuctionController@myAuctions');
+Route::get('my-bids','AuctionController@myBids');
 
 //Route::group(array('domain' => 'admin.localhost'), function(){
 //    Route::get('/product/add',['as' => 'admin.product.add', 'uses' =>'AdminPanelController@home']);

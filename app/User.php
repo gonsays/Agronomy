@@ -25,7 +25,11 @@ class User extends Authenticatable
     ];
 
     public function auctions(){
-        return $this->hasMany('App\Auction');
+        return $this->hasMany('App\Auction','seller_id');
+    }
+
+    public function bids(){
+        return $this->hasMany('App\Bid','bidder_id');
     }
 
     public function isAdmin()

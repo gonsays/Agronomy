@@ -5,11 +5,10 @@ namespace App\Http\Controllers;
 use App\Auction;
 use App\Bid;
 use Auth;
-use App\User;
-use Illuminate\Auth\Access\Response;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Response;
 
 class BidController extends Controller
 {
@@ -41,35 +40,30 @@ class BidController extends Controller
      */
     public function store(Request $request)
     {
-//
-//        var_dump($request->all());
-//
-//        //different users
-//        $bidder = Auth::user();
-//
-//
-//
-//        //validate input
-//        $this->validate($request,[
-//            'auction_id' => 'numeric|exists:auctions,id|required',
-//            'bid_amount' => 'numeric|required',
-//        ]);
-//
-//        $auction = Auction::get($request->input('auction_id'));
-//
-//        if($bidder == $auction->seller){
-//            return abort(403,"Unauthorized");
-//        }
-//
-//        $bid = new Bid();
-//        $bid->auction_id = $request->input('auction_id');
-//        $bid->bidder = $bidder;
-//        $bid->amount = $request->input('bid_amount');
-//        $bid->status = "Open";
-//        $bid->save();
+
+        $bidder = Auth::user();
+
+        //validate input
+        $this->validate($request,[
+            'auction_id' => 'numeric|exists:auctions,id|required',
+            'bid_amount' => 'numeric|required',
+        ]);
+
+        $auction = Auction::find($request->input('auction_id'));
+
+        if($bidder == $auction->seller){
+            return Response::json(abort(403,"Unauthorized"));
+        }
+
+        $bid = new Bid();
+        $bid->auction_id = $request->input('auction_id');
+        $bid->amount = $request->input('bid_amount');
+        $bid->status = "Open";
+        $bid->bidder_id = $bidder->id;
+        $bid->save();
 
 
-        return \Response::json("Hello World");
+        return Response::json("Your bid was successfully placed");
     }
 
     /**

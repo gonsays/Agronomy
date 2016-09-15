@@ -7,6 +7,7 @@ use App\Product;
 use App\Variety;
 use Auth;
 //use DebugBar\DebugBar;
+use DateTime;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -99,22 +100,26 @@ class AuctionController extends Controller
     public function show($id)
     {
         $auction = Auction::with('variety')->find($id);
-        $bids = $auction->bids;
+        $bids = $auction->bids->sortByDesc('amount');
         $suggestedBids = [];
         $highestBid = $auction->bids()->max('amount');
 
         $bid_start = $highestBid?$highestBid:$auction->base_price;
 
         for($i=1;$i<=5;$i++){
-            $amt = $bid_start+($bid_start/10*$i);
+            $amt = round($bid_start+($bid_start/10*$i));
             array_push($suggestedBids,$amt);
         }
 
+        $now = new DateTime();
+        $daysLeft =  $now->diff(new DateTime($auction->bidding_end))->days;
 
         return view('auction.show')->with('auction',$auction)
             ->with('highestBid',$highestBid)
             ->with('suggestedBids',$suggestedBids)
-            ->with('bids',$bids);
+            ->with('bids',$bids)
+            ->with('daysLeft',$daysLeft)
+            ;
     }
 
     /**
@@ -176,5 +181,23 @@ class AuctionController extends Controller
         $auctionList = Auction::where('location','LIKE', '%'.$location.'%')->where('variety_id',$variety_id)->get();
         return view('auction.index')->with('auctionList', $auctionList);
 
+    }
+
+    public function myAccount(){
+        $user = Auth::user();
+        $auctions = $user->auctions;
+        return view('user.my_account');
+    }
+
+    public function myAuctions(){
+        $user = Auth::user();
+        $auctions = $user->auctions()->with('variety')->get();
+        return view('user.my_auctions')->with('auctions',$auctions);
+    }
+
+    public function myBids(){
+        $user = Auth::user();
+        $bids = $user->bids;
+        return view('user.my_bids')->with('bids',$bids);
     }
 }

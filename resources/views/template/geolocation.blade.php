@@ -1,5 +1,7 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSuRSONWkdv2Gk7T6G8OEqYNHHarultFw=&libraries=places"></script>
 
+
+
 <script type="text/javascript">
     function getLocation() {
         var geocoder = new google.maps.Geocoder;
@@ -14,7 +16,7 @@
                 geocoder.geocode({'location': latlng}, function(results, status) {
                     if (status === google.maps.GeocoderStatus.OK) {
                         if (results[2]) {
-                            locationElement.value = results[2].address_components[1].long_name;
+                            locationElement.value = results['{{ $precision  }}'].formatted_address;
                         }
                     }
                 });

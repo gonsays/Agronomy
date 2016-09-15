@@ -21,7 +21,7 @@
 
     @include('template.update_varieties')
 
-    @include('template.geolocation')
+    @include('template.geolocation',['precision'=>1])
 
 
 @stop
@@ -93,9 +93,9 @@
                             </div>
 
 
-                            {{--Expected Quantity--}}
+                            {{-- Quantity--}}
                             <div class="form-group {{ $errors->has('quantity') ?'has-errors':'' }}">
-                                <label for="quantity">Expected Quantity</label>
+                                <label for="quantity">Quantity</label>
                                 <input type="number" min="10" name="quantity" class="form-control" id="quantity" value="{{ old('quantity')?old('quantity'):10 }}" placeholder="Enter Quantity">
                                 <small>Minimum Quantity required: 10Kg</small>
 
@@ -110,7 +110,6 @@
                             <div class="form-group {{ $errors->has('base_price') ?'has-errors':'' }}">
                                 <label for="base_price">Base Price</label>
                                 <input type="number" min="10" name="base_price" class="form-control" id="base_price" value="{{ old('base_price')?old('base_price'):1000 }}" placeholder="Enter Price">
-                                <small>Per Kg</small>
                                 @if($errors->has('base_price'))
                                     <span class="help-block danger">
                                         <strong>{{$errors->first('base_price')}}</strong>

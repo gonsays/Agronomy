@@ -94,11 +94,6 @@
 .pointer {
   cursor: pointer; }
 
-.item-box {
-  background: lightgrey;
-  padding: 20px;
-  margin-bottom: 20px; }
-
 .auction-container {
   background: url("/img/Apples_background.jpg");
   padding: 20px;
@@ -108,7 +103,8 @@
   padding: 15px;
   background: white;
   box-shadow: #4d4d4d 0 0 7px;
-  min-height: 405px; }
+  min-height: 405px;
+  overflow: auto; }
 
 .product-amount {
   width: 100%;
@@ -161,5 +157,50 @@ button[data-id=bid_amount] {
 
 #input-custom-bid {
   padding: 25px 16px; }
+
+.item-box {
+  display: block;
+  text-decoration: none;
+  color: black;
+  height: 160px;
+  width: 100%;
+  padding: 10px;
+  box-shadow: #ababab 0 1px 3px; }
+  .item-box:hover, .item-box:focus {
+    text-decoration: none;
+    color: black;
+    outline: none;
+    box-shadow: #7fc1d9 0 1px 3px; }
+  .item-box small {
+    display: block; }
+  .item-box h2 {
+    margin: 0;
+    width: 100%;
+    font-family: "Lato Black", sans-serif; }
+
+.dropdown {
+  display: inline-block; }
+  .dropdown a:hover {
+    border-color: transparent !important; }
+
+.nav-pills {
+  margin: 0; }
+  .nav-pills li a {
+    border-radius: 0;
+    background: #efefef;
+    transition: all .3s ease;
+    color: gray; }
+    .nav-pills li a:hover {
+      background-color: #e0e0e0; }
+  .nav-pills li:first-child a {
+    border-radius: 4px 0 0 4px; }
+  .nav-pills li:last-child a {
+    border-radius: 0 4px 4px 0; }
+
+.my-auctions-container {
+  margin-top: 20px; }
+  .my-auctions-container .my-auction {
+    border: 1px solid lightgrey;
+    padding: 10px; }
 
 /*# sourceMappingURL=app.css.map */
