@@ -36,7 +36,7 @@
                     <div class="panel-heading">Start Auction</div>
 
                     <div class="panel-body">
-                        {{ Form::open(['action'=>'AuctionController@store']) }}
+                        {{ Form::open(['action'=>'AuctionController@store','files'=>true]) }}
 
 
                             {{--Crop Type--}}
@@ -152,6 +152,18 @@
                                     </span>
                                 @endif
                             </div>
+
+
+{{--                            <div class="form-group {{ $errors->has('images') ?'has-errors':'' }}" >
+                                <label for="images">Upload Photos</label>
+                                {!! Form::file('images[]', ['multiple'=>true,'id'=>'images','accept'=>'image/*']) !!}
+
+                                @if($errors->has('images'))
+                                    <span class="help-block danger">
+                                        <strong>{{$errors->first('images')}}</strong>
+                                    </span>
+                                @endif
+                            </div>--}}
 
                             <div class="form-group">
                                 <input type="submit" value="Start Auction" class="btn-lg btn btn-success full-width">

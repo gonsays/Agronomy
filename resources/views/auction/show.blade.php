@@ -67,6 +67,10 @@
                 <div class="columns small-8">
                     <div class="product-details-container">
 
+                        @if($auction->status == "Closed" || $daysLeft<1)
+                            <div class="alert alert-danger">This Auction has Ended</div>
+                        @endif
+
                         <div class="small-12 columns">
                             <h3>{{ $auction->variety->name }}</h3>
                             <h5>Apple</h5>
@@ -94,6 +98,8 @@
                             <p>{{ $auction->description }}</p>
                         </div>
 
+
+                        @if($auction->status == "Open")
                         <div class="small-6 columns">
                             <b>Bidding ends on</b>
                             <p>{{ $auction->bidding_end }}</p>
@@ -104,6 +110,12 @@
                                 {{ $daysLeft }} days to go
                             </div>
                         </div>
+
+                        @else
+                            <div class="small-12 columns">
+                                <p>The bidding period has ended for this product</p>
+                            </div>
+                        @endif
 
 
                         <div class="small-6 columns">
@@ -124,7 +136,7 @@
                         </div>
 
 
-                        @if(Auth::user() != $auction->seller)
+                        @if(Auth::user() != $auction->seller && $daysLeft>0)
                         {{--Bidding Form--}}
                         <div class="bidding-container">
                             <form action="{{ action("BidController@store") }}" method="post" id="form_bid">
@@ -151,7 +163,7 @@
                         </div>
                         @endif
 
-                        @if($daysLeft>0)
+                        @if($daysLeft>0 && Auth::user() == $auction->seller)
                         <div class="row">
                             <div class="small-12 columns">
                                 <a href="#" class="btn btn-default btn-lg">End Auction</a>
@@ -168,8 +180,28 @@
 
         <div class="bids-view-container">
             <div class="row">
-                <div class="small-6 columns">
 
+                <div class="small-12 columns">
+                    @if($auction->hasEnded())
+
+                        {{--Display no bids--}}
+                        @if($bids->isEmpty())
+                            <div class="alert alert-primary">
+                                This auction didn't receive any bids.
+                            </div>
+
+                        @else
+                            {{--Diplay Winning Bid--}}
+                            <div class="alert alert-success">This Bid has been won by
+                                {{ link_to('foo/bar', $bids->first()->bidder->username) }} {{--todo link to bidder account--}}
+                                for a sum of Rs. {{ $bids->first()->amount }}.
+                            </div>
+                        @endif
+
+                    @endif
+                </div>
+
+                <div class="small-6 columns">
 
                     @if($bids->isEmpty())
                         <h1 class="notification-med">No Bids Yet</h1>
@@ -183,6 +215,7 @@
                                 <th>Bidder</th>
                                 <th>Amount</th>
                                 <th>Date</th>
+                                <th></th>
                             </tr>
                             </thead>
 

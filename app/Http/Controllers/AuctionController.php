@@ -32,7 +32,7 @@ class AuctionController extends Controller
      */
     public function index()
     {
-        $auctionList = Auction::all();
+        $auctionList = Auction::where('bidding_end','>',(new DateTime())->format("Y-m-d"))->get();
         return view('auction.index')->with('auctionList', $auctionList);
     }
 
@@ -71,6 +71,14 @@ class AuctionController extends Controller
             'bidding_end' => 'required|date_format:Y-m-d|after:today',
             'description' => 'required'
         ]);
+
+/*        $imagePath = "/images/auctions/";
+        $imagesDirectory['products'] = base_path().$imagePath;
+        $files = $request->file('images');
+
+        foreach ($files as $file){
+            $file->move($imagesDirectory['products'],$file->getClientOriginalName());
+        }*/
 
         $auction = new Auction();
         $auction->variety_id = $request->get('variety_id');
@@ -112,7 +120,8 @@ class AuctionController extends Controller
         }
 
         $now = new DateTime();
-        $daysLeft =  $now->diff(new DateTime($auction->bidding_end))->days;
+//        $daysLeft =  (new DateTime($auction->bidding_end))->diff($now)->format("%r%a");
+        $daysLeft =  $now->diff(new DateTime($auction->bidding_end))->format("%r%a");
 
         return view('auction.show')->with('auction',$auction)
             ->with('highestBid',$highestBid)
@@ -197,7 +206,7 @@ class AuctionController extends Controller
 
     public function myBids(){
         $user = Auth::user();
-        $bids = $user->bids;
+        $bids = $user->bids->sortByDesc('created_at');
         return view('user.my_bids')->with('bids',$bids);
     }
 }

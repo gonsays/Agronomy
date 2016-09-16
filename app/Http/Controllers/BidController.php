@@ -42,11 +42,15 @@ class BidController extends Controller
     {
 
         $bidder = Auth::user();
+        $auction_id = $request->input('auction_id');
+        $auction = Auction::find($auction_id)->get();
+
+
 
         //validate input
         $this->validate($request,[
             'auction_id' => 'numeric|exists:auctions,id|required',
-            'bid_amount' => 'numeric|required',
+            'bid_amount' => 'numeric|required|max:'.$auction->base_price,
         ]);
 
         $auction = Auction::find($request->input('auction_id'));

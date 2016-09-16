@@ -20,4 +20,11 @@ class Auction extends Model
     public function bids(){
         return $this->hasMany('App\Bid');
     }
+
+    public function hasEnded(){
+        if($this->status == "Open")
+            return false;
+        else if($this->status == "Closed")
+            return true;
+    }
 }

@@ -28,7 +28,8 @@
                             <td>{{ $bid->auction->variety->product->name }}</td>
                             <td>{{ $bid->auction->variety->name }}</td>
                             <td>{{ $bid->amount }}</td>
-                            <td>{{ $bid->created_at->toDateString() }}</td>
+                            <td>{{ date('F d, Y h:m', strtotime($bid->created_at)) }}</td>
+                            <td>{{ $bid->status }}</td>
                             <td><a href="{{ action('AuctionController@show', $bid->auction->id ) }}" target="_blank">View Item</a></td>
                         </tr>
                     @endforeach
