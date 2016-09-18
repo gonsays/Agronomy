@@ -1,5 +1,7 @@
 <?php
 
+use App\Product;
+use App\Type;
 use Illuminate\Database\Seeder;
 
 class ProductsTableSeeder extends Seeder
@@ -11,18 +13,29 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        $file = File::get('database/seeds/products_list.txt');
-        $products = explode("\n",$file);
+
+        $directory = getcwd()."/database/seeds/Products";
+        $destDirectory = "./images/products";
+        $types = scandir($directory);
+        $types = array_diff($types, array('.', '..'));
 
 
-        foreach ($products as $product){
-            DB::table('products')->insert(
-                [
-                    'name' => $product,
-                    'measurement_unit' => "Kg",
-                    "type" => "Fruit"
-                ]
-            );
+        foreach ($types as $typeName){
+            $typeObj = Type::where('name',ucwords($typeName))->first();
+            $typeDirectory = $directory ."/". $typeName;
+            $products = array_diff(scandir($typeDirectory), array('.', '..'));
+
+            foreach ($products as $productName){
+
+                $destProductDir = "$destDirectory/$typeName/$productName";
+                if(!is_dir($destProductDir)) mkdir($destProductDir);
+
+                $product = new Product();
+                $product->name=ucwords($productName);
+                $product->measurement_unit = "Kg";
+                $product->type()->associate($typeObj);
+                $product->save();
+            }
         }
     }
 }

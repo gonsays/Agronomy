@@ -13,4 +13,8 @@ class Product extends Model
     public function varieties(){
         return $this->hasMany('App\Variety');
     }
+
+    public function type(){
+        return $this->belongsTo('App\Type');
+    }
 }
