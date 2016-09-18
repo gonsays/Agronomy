@@ -59,7 +59,7 @@
                 <div class="columns small-4">
                     <div class="product-image-container">
                         {{--todo fix product image--}}
-                        <img src="/img/red_delicious.jpg" alt="">
+                        <img src="{{ $auction->variety->image }}" alt="">
                         {{--<img src="{{ $auction->product->image }}" alt="">--}}
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                 <div class="columns small-8">
                     <div class="product-details-container">
 
-                        @if($auction->status == "Closed" || $daysLeft<1)
+                        @if($auction->status == "Closed")
                             <div class="alert alert-danger">This Auction has Ended</div>
                         @endif
 

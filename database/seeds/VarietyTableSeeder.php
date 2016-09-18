@@ -15,7 +15,7 @@ class VarietyTableSeeder extends Seeder
     public function run()
     {
         $directory = getcwd()."/database/seeds/Products/";
-        $destinationImageDirectory = getcwd()."/images/products";
+        $destinationImageDirectory = "/images/products";
         $folders = scandir($directory);
         $folders = array_diff($folders, array('.', '..'));
 

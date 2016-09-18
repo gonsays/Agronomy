@@ -123,8 +123,8 @@ class AuctionController extends Controller
 //        $daysLeft =  (new DateTime($auction->bidding_end))->diff($now)->format("%r%a");
         $dateDifference = $now->diff(new DateTime($auction->bidding_end));
         $daysLeft =  $dateDifference->format("%r%a");
-        $hoursLeft = $dateDifference->format("G");
-        $minLeft = $dateDifference->format("i");
+        $hoursLeft = $dateDifference->format("%H");
+        $minLeft = $dateDifference->format("%m");
 
         return view('auction.show')->with('auction',$auction)
             ->with('highestBid',$highestBid)

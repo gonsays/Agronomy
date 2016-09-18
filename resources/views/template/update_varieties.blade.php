@@ -5,6 +5,13 @@
 
         $.get('{{ action('VarietyController@getVarieties') }}/'+e.target.value,function (data) {
 
+            varietySelectElement.empty();
+
+            /*Add All Varieties Option*/
+            let optionElement = document.createElement("option");
+            optionElement.innerText = "All Varieties";
+            varietySelectElement.append(optionElement);
+
             for(var item in data){
                 if(data.hasOwnProperty(item)){
                     let optionElement = document.createElement("option");

@@ -29,7 +29,7 @@ class ChangeTypeFieldToForeignKeyInProductsTable extends Migration
         Schema::table('products',function (Blueprint $table){
             $table->dropForeign('products_type_id_foreign');
            $table->dropColumn('type_id');
-            $table->string('type');
+            $table->string('type')->nullable();
         });
     }
 }
