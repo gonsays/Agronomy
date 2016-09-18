@@ -46,6 +46,7 @@
 
                             <div class="columns small-3">
                                 <select name="variety_id" id="variety_id" class="form-control selectpicker" data-live-search="true">
+                                    <option value="">All Varieties</option>
                                     @foreach($varieties as $id=>$name)
                                         <option value="{{$id}}">{{$name}}</option>
                                     @endforeach

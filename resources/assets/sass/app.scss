@@ -2,7 +2,7 @@
 @import "homepage";
 
 *{
-  font-family: 'Lato', sans-serif;
+  font-family: 'Lato', sans-serif !important;
 }
 
 .dark-shadow{
@@ -111,11 +111,13 @@ button[data-id=bid_amount]{
 .notification-big{
   font-size:5em;
   font-weight: 200;
+
 }
 
 .notification-med{
   font-size: 3em;
   font-weight: 300;
+
 }
 
 .pill{
@@ -209,3 +211,5 @@ button[data-id=bid_amount]{
   }
 }
 
+
+/*Email css*/

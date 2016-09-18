@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Auction;
 use DateTime;
 use Illuminate\Console\Command;
+use Mail;
 
 class CloseAuctionCommand extends Command
 {
@@ -37,6 +38,8 @@ class CloseAuctionCommand extends Command
      *
      * @return mixed
      */
+
+    //todo complete send email part
     public function handle()
     {
         $date = new DateTime();
@@ -45,13 +48,58 @@ class CloseAuctionCommand extends Command
         $auctions->update(['status'=>'Closed']);
 
         foreach ($auctions as $auction){
-            $bid = $auction->bids->sortByDesc('amount')->first();
+            $bids = $auction->bids->sortByDesc('amount');
+            $winningBid = $bids->first();
 
-            if($bid != null){
-                $bid->status = "Won";
-                $bid->save();
+            if($winningBid != null){
+                $winningBid->status = "Won";
+                $winningBid->save();
+                $this->sendWinningMail($winningBid);
             }
+
+            $this->sendConsolationMail($bids);
         }
-        //todo generate notifications
+
+
+    }
+
+    private function sendWinningMail($winningBid)
+    {
+        $data = [
+            'bid' => $winningBid,
+            'bidder' => $winningBid->bidder,
+            'auction' => $winningBid->auction,
+            'variety' => $winningBid->auction->variety,
+            'product' => $winningBid->auction->variety->product
+        ];
+
+        $email = $winningBid->bidder->email;
+
+        Mail::send('emails.bid_win', $data, function ($message) use ($email) {
+            $message->from('support@agronomy.com', 'Agronomy');
+            $message->to($email)->subject('You have won the Bid');
+        });
+    }
+
+    private function sendConsolationMail($bids)
+    {
+
+        $bidders = $bids->bidder->unique('email');
+        $temp = $bids->first();
+
+        $data = [
+            'variety' => $temp->auction->variety,
+            'product' => $temp->auction->variety->product
+        ];
+
+        foreach($bidders as $bidder){
+            $data->bidder = $bidder;
+
+            Mail::send('emails.bid_win', $data, function ($message) use ($bidder) {
+                $message->from('support@agronomy.com', 'Agronomy');
+                $message->to($bidder->email)->subject('You have won the Bid');
+            });
+        }
+
     }
 }

@@ -121,13 +121,18 @@ class AuctionController extends Controller
 
         $now = new DateTime();
 //        $daysLeft =  (new DateTime($auction->bidding_end))->diff($now)->format("%r%a");
-        $daysLeft =  $now->diff(new DateTime($auction->bidding_end))->format("%r%a");
+        $dateDifference = $now->diff(new DateTime($auction->bidding_end));
+        $daysLeft =  $dateDifference->format("%r%a");
+        $hoursLeft = $dateDifference->format("G");
+        $minLeft = $dateDifference->format("i");
 
         return view('auction.show')->with('auction',$auction)
             ->with('highestBid',$highestBid)
             ->with('suggestedBids',$suggestedBids)
             ->with('bids',$bids)
             ->with('daysLeft',$daysLeft)
+            ->with('hoursLeft',$hoursLeft)
+            ->with('minLeft',$minLeft)
             ;
     }
 
@@ -184,7 +189,7 @@ class AuctionController extends Controller
         $this->validate($request,[
             'location' => 'required',
             'product_id' => 'required|exists:products,id',
-            'variety_id' => 'required|exists:varieties,id'
+            'variety_id' => 'exists:varieties,id'
         ],$messages);
 
         $auctionList = Auction::where('location','LIKE', '%'.$location.'%')->where('variety_id',$variety_id)->get();

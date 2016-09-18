@@ -1,0 +1,16 @@
+/*Email Css*/
+
+.sub{
+  padding: 10px 20px;
+  width: 200px;
+  height: 100px;
+
+  &:first-child{
+    background-size: contain;
+    background: url("/img/logo.png") no-repeat;
+  }
+
+  &:last-child{
+    float: right;
+  }
+}

@@ -39,3 +39,7 @@ Route::get('my-bids','AuctionController@myBids');
 //    Route::get('/product/add',['as' => 'admin.product.add', 'uses' =>'AdminPanelController@home']);
 //    Route::get('/product/list',['as' => 'admin.product.list', 'uses' =>'AdminPanelController@productlist']);
 //});
+
+Route::get('/test',function(){
+   return view('emails.bid_win');
+});

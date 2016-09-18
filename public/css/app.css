@@ -52,7 +52,7 @@
     transform: rotate(-20deg); } }
 
 * {
-  font-family: 'Lato', sans-serif; }
+  font-family: 'Lato', sans-serif !important; }
 
 .dark-shadow {
   box-shadow: #1a1a1a 0 5px 5px; }
@@ -202,5 +202,18 @@ button[data-id=bid_amount] {
   .my-auctions-container .my-auction {
     border: 1px solid lightgrey;
     padding: 10px; }
+
+/*Email css*/
+
+/*Email Css*/
+.sub {
+  padding: 10px 20px;
+  width: 200px;
+  height: 100px; }
+  .sub:first-child {
+    background-size: contain;
+    background: url("/img/logo.png") no-repeat; }
+  .sub:last-child {
+    float: right; }
 
 /*# sourceMappingURL=app.css.map */

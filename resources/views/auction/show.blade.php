@@ -100,16 +100,22 @@
 
 
                         @if($auction->status == "Open")
-                        <div class="small-6 columns">
-                            <b>Bidding ends on</b>
-                            <p>{{ $auction->bidding_end }}</p>
-                        </div>
-
-                        <div class="small-6 columns">
-                            <div class="alert alert-warning">
-                                {{ $daysLeft }} days to go
+                            <div class="small-6 columns">
+                                <b>Bidding ends on</b>
+                                <p>{{ $auction->bidding_end }}</p>
                             </div>
-                        </div>
+
+                            <div class="small-6 columns">
+                                <div class="alert alert-warning">
+                                    @if($daysLeft)
+                                        {{ $daysLeft }} days to go
+                                    @elseif($hoursLeft)
+                                        {{ $hoursLeft }} hours to go
+                                    @else
+                                        {{ $minLeft }} minutes to go
+                                    @endif
+                                </div>
+                            </div>
 
                         @else
                             <div class="small-12 columns">
