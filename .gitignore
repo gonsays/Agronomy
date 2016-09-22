@@ -16,4 +16,6 @@ bootstrap/cache/*
 /.idea/
 /public/bower_components/
 /_ide_helper.php
-/images/*
+/vendor
+images/*
+/public/build/

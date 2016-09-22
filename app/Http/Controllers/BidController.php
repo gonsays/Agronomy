@@ -50,14 +50,18 @@ class BidController extends Controller
         //validate input
         $this->validate($request,[
             'auction_id' => 'numeric|exists:auctions,id|required',
-            'bid_amount' => 'numeric|required|max:'.$auction->base_price,
+            'bid_amount' => 'numeric|required|min:'.$auction->base_price,
         ]);
+
+        echo "pass validation";
 
         $auction = Auction::find($request->input('auction_id'));
 
         if($bidder == $auction->seller){
             return Response::json(abort(403,"Unauthorized"));
         }
+
+        echo "pass validation 2";
 
         $bid = new Bid();
         $bid->auction_id = $request->input('auction_id');
@@ -66,6 +70,7 @@ class BidController extends Controller
         $bid->bidder_id = $bidder->id;
         $bid->save();
 
+        echo "new bid created";
 
         return Response::json("Your bid was successfully placed");
     }

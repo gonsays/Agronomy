@@ -62,15 +62,18 @@ class AuctionController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+          'variety_id.integer' => "Please choose a variety"
+        ];
 
         $this->validate($request, [
-            'variety_id' => 'integer|exists:varieties,id',
+//            'variety_id' => 'integer|exists:varieties,id',
             'quantity' => 'required|numeric|min:10',
             'base_price' => 'required|numeric|min:10',
             'location' => 'required|string',
             'bidding_end' => 'required|date_format:Y-m-d|after:today',
             'description' => 'required'
-        ]);
+        ],$messages);
 
 /*        $imagePath = "/images/auctions/";
         $imagesDirectory['products'] = base_path().$imagePath;

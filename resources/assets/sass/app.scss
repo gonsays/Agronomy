@@ -1,7 +1,7 @@
 @import "variables";
 @import "homepage";
 
-*{
+*:not(i):not(.glyphicon){
   font-family: 'Lato', sans-serif !important;
 }
 

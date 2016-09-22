@@ -51,7 +51,7 @@
   to {
     transform: rotate(-20deg); } }
 
-* {
+*:not(i):not(.glyphicon) {
   font-family: 'Lato', sans-serif !important; }
 
 .dark-shadow {

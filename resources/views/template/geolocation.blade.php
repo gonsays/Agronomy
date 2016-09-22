@@ -1,7 +1,4 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSuRSONWkdv2Gk7T6G8OEqYNHHarultFw=&libraries=places"></script>
-
-
-
 <script type="text/javascript">
     function getLocation() {
         var geocoder = new google.maps.Geocoder;
@@ -23,7 +20,6 @@
             });
 
         locationElement.disabled = false;
-
         return false;
     }
 
@@ -35,6 +31,4 @@
 
     var input = document.getElementById('location');
     var autocomplete = new google.maps.places.Autocomplete(input, options);
-
-
 </script>

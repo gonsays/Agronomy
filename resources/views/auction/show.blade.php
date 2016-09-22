@@ -73,7 +73,7 @@
 
                         <div class="small-12 columns">
                             <h3>{{ $auction->variety->name }}</h3>
-                            <h5>Apple</h5>
+                            <h5>{{ $auction->variety->product->name }}</h5>
                         </div>
 
                         <hr>
