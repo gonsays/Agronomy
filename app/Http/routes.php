@@ -15,9 +15,17 @@ use App\Product;
 
 Route::get('/', function () {
     $products = Product::all(['id','name'])->pluck('name','id');
-    $varieties = Product::first()->varieties()->pluck('name','id');
+
+    try{
+        $varieties = Product::first()->varieties->pluck('name','id');
+    }
+    catch(Exception $e){
+        $varieties = null;
+    }
+
     return view('welcome')->with('products',$products)->with('varieties',$varieties);
 });
+
 Route::auth();
 Route::get('/home', 'HomeController@index');
 Route::get('/adminpanel/product/add',['as' => 'admin.product.add', 'uses' =>'AdminPanelController@home']);
