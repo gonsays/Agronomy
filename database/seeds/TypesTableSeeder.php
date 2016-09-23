@@ -18,6 +18,7 @@ class TypesTableSeeder extends Seeder
         $folders = scandir($sourceDirectory);
         $folders = array_diff($folders, array('.', '..'));
 
+        if(!is_dir("./public/images")) mkdir(".public/images");
         if(!is_dir($destDirectory)) mkdir($destDirectory);
 
         foreach ($folders as $typeName){
