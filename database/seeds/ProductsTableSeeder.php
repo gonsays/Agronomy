@@ -15,7 +15,7 @@ class ProductsTableSeeder extends Seeder
     {
 
         $directory = getcwd()."/database/seeds/Products";
-        $destDirectory = "./images/products";
+        $destDirectory = "./public/images/products";
         $types = scandir($directory);
         $types = array_diff($types, array('.', '..'));
 
