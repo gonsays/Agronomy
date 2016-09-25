@@ -15,7 +15,7 @@ class VarietyTableSeeder extends Seeder
     public function run()
     {
         $directory = getcwd()."/database/seeds/Products/";
-        $destinationImageDirectory = "/images/products";
+        $destDirectory = "./public/images/products";
         $folders = scandir($directory);
         $folders = array_diff($folders, array('.', '..'));
 
@@ -30,7 +30,7 @@ class VarietyTableSeeder extends Seeder
 
                 foreach ($varieties as $varietyName){
                     $varietyDir = "$productDir/$varietyName";
-                    $destinationVarietyDirectory = "$destinationImageDirectory/$typeName/$productName/$varietyName";
+                    $destinationVarietyDirectory = "$destDirectory/$typeName/$productName/$varietyName";
                     $variety = new Variety();
                     copy($varietyDir, $destinationVarietyDirectory);
                     $fileName = pathinfo($varietyName, PATHINFO_FILENAME);
