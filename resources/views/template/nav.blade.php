@@ -9,15 +9,12 @@
 
                         <a href="{{ action('HomeController@index') }}">Home</a>
 
+                        <a href="{{ action('AuctionController@index') }}" class="btn btn-default">Auctions</a>
+
                         @if(Auth::user()->isAdmin())
                             <a href="{{ action('AdminPanelController@home') }}" class="btn btn-default">Admin Panel</a>
                         @endif
-
-
-
                         <span>
-
-
 
                             <div class="dropdown">
                               <a class="btn btn-default" data-toggle="dropdown">

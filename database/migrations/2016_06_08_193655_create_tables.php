@@ -34,8 +34,8 @@ class CreateTables extends Migration
 
             $table->timestamps();
 
-            $table->foreign('product_id') ->references('id')->on('products');
-            $table->foreign('seller_id') ->references('id')->on('users');
+            $table->foreign('product_id') ->references('id')->on('products')->onDelete('cascade');;
+            $table->foreign('seller_id') ->references('id')->on('users')->onDelete('cascade');;
         } );
 
         Schema::create('bids',function (Blueprint $table){
@@ -48,8 +48,8 @@ class CreateTables extends Migration
 
             $table->timestamps();
             
-            $table->foreign('auction_id')->references('id')->on('auctions');
-            $table->foreign('buyer_id')->references('id')->on('users');
+            $table->foreign('auction_id')->references('id')->on('auctions')->onDelete('cascade');;
+            $table->foreign('buyer_id')->references('id')->on('users')->onDelete('cascade');;
         } );
         
     }

@@ -1,7 +1,6 @@
 <?php
 
 use App\Product;
-use App\Type;
 use App\Variety;
 use Illuminate\Database\Seeder;
 
@@ -14,13 +13,14 @@ class VarietyTableSeeder extends Seeder
      */
     public function run()
     {
-        $directory = getcwd()."/database/seeds/Products/";
-        $destDirectory = "./public/images/products";
-        $folders = scandir($directory);
-        $folders = array_diff($folders, array('.', '..'));
+        $source_directory = getcwd()."/database/seeds/Products/";
+        $destDirectory = "./images/products";
 
-        foreach ($folders as $typeName){
-            $typeDir ="$directory/$typeName";
+        $types_folders = scandir($source_directory);
+        $types_folders = array_diff($types_folders, array('.', '..'));
+
+        foreach ($types_folders as $typeName){
+            $typeDir ="$source_directory/$typeName";
             $products = array_diff(scandir($typeDir), array('.', '..'));
 
             foreach ($products as $productName){
@@ -32,7 +32,10 @@ class VarietyTableSeeder extends Seeder
                     $varietyDir = "$productDir/$varietyName";
                     $destinationVarietyDirectory = "$destDirectory/$typeName/$productName/$varietyName";
                     $variety = new Variety();
-                    copy($varietyDir, $destinationVarietyDirectory);
+
+                    if(!Storage::exists($destinationVarietyDirectory))
+                        Storage::put($destinationVarietyDirectory, file_get_contents($varietyDir));
+
                     $fileName = pathinfo($varietyName, PATHINFO_FILENAME);
                     $variety->name = ucwords($fileName);
                     $variety->image = "$destinationVarietyDirectory";

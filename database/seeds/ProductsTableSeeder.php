@@ -15,7 +15,7 @@ class ProductsTableSeeder extends Seeder
     {
 
         $directory = getcwd()."/database/seeds/Products";
-        $destDirectory = "./public/images/products";
+//        $destDirectory = "./public/images/products";
         $types = scandir($directory);
         $types = array_diff($types, array('.', '..'));
 
@@ -27,8 +27,8 @@ class ProductsTableSeeder extends Seeder
 
             foreach ($products as $productName){
 
-                $destProductDir = "$destDirectory/$typeName/$productName";
-                if(!is_dir($destProductDir)) mkdir($destProductDir);
+//                $destProductDir = "$destDirectory/$typeName/$productName";
+//                if(!is_dir($destProductDir)) mkdir($destProductDir);
 
                 $product = new Product();
                 $product->name=ucwords($productName);

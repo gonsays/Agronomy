@@ -25,7 +25,8 @@ class ChangeDescriptionTableToTextInAuction extends Migration
     public function down()
     {
         Schema::table('auctions',function (Blueprint $table){
-            $table->string('description')->change();
+            DB::statement("ALTER TABLE auctions DROP COLUMN description");
+            $table->string('description')->nullable();
         });
     }
 }

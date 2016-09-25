@@ -59,8 +59,7 @@
                 <div class="columns small-4">
                     <div class="product-image-container">
                         {{--todo fix product image--}}
-                        <img src="{{ $auction->variety->image }}" alt="">
-                        {{--<img src="{{ $auction->product->image }}" alt="">--}}
+                        <img src="{{ Storage::url($auction->variety->image) }}" alt="">
                     </div>
                 </div>
 

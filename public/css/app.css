@@ -162,7 +162,6 @@ button[data-id=bid_amount] {
   display: block;
   text-decoration: none;
   color: black;
-  height: 160px;
   width: 100%;
   padding: 10px;
   box-shadow: #ababab 0 1px 3px; }
@@ -171,6 +170,9 @@ button[data-id=bid_amount] {
     color: black;
     outline: none;
     box-shadow: #7fc1d9 0 1px 3px; }
+  .item-box .image-box {
+    height: 200px;
+    background-size: cover; }
   .item-box small {
     display: block; }
   .item-box h2 {
