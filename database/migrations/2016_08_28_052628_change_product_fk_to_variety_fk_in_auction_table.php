@@ -28,8 +28,10 @@ class ChangeProductFkToVarietyFkInAuctionTable extends Migration
     public function down()
     {
         Schema::table('auctions',function (Blueprint $table){
+            DB::statement("TRUNCATE auctions CASCADE");
             $table->dropForeign('auctions_variety_id_foreign');
-            $table->renameColumn('variety_id','product_id');
+            $table->dropColumn('variety_id');
+            $table->integer('product_id');
             $table->foreign('product_id')->references('id')->on('products');
         });
     }

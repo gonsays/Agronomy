@@ -15,7 +15,7 @@
                         <li>
                             <a href="{{ action('AuctionController@show',$auction->id) }}" class="item-box">
 
-                                <div class="image-box" style="background-image: url('{{ $auction->image }}')"></div>
+                                <div class="image-box" style="background-image: url('{{ Storage::url($auction->variety->image) }}')"></div>
 
                                 <div class="details-box">
                                     <b>{{ $auction->variety->name }} ({{ $auction->variety->product->name }})</b>

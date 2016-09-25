@@ -14,16 +14,16 @@ class TypesTableSeeder extends Seeder
     {
 
         $sourceDirectory = getcwd()."/database/seeds/Products";
-        $destDirectory = "./public/images/products";
+//        $destDirectory = "./public/images/products";
         $folders = scandir($sourceDirectory);
         $folders = array_diff($folders, array('.', '..'));
 
-        if(!is_dir("./public/images")) mkdir(".public/images");
-        if(!is_dir($destDirectory)) mkdir($destDirectory);
+//        if(!is_dir("./public/images")) mkdir(".public/images");
+//        if(!is_dir($destDirectory)) mkdir($destDirectory);
 
         foreach ($folders as $typeName){
-            $destTypeDir = "$destDirectory/$typeName";
-            if(!is_dir($destTypeDir)) mkdir($destTypeDir);
+//            $destTypeDir = "$destDirectory/$typeName";
+//            if(!is_dir($destTypeDir)) mkdir($destTypeDir);
             Type::create(['name'=>ucwords($typeName)]);
         }
 
