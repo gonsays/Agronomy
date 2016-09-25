@@ -159,7 +159,6 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-//        Lsrur\Inspector\InspectorServiceProvider::class,
     ],
 
     /*
