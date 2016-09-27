@@ -5,11 +5,13 @@
             <div>
                 <a class="logo" href="{{ url("/") }}"></a>
                 <div class="menu right">
+                    <a href="{{ action('AuctionController@index') }}" class="btn btn-default">Auctions</a>
+
                     @if(Auth::check())
 
                         <a href="{{ action('HomeController@index') }}">Home</a>
 
-                        <a href="{{ action('AuctionController@index') }}" class="btn btn-default">Auctions</a>
+
 
                         @if(Auth::user()->isAdmin())
                             <a href="{{ action('AdminPanelController@home') }}" class="btn btn-default">Admin Panel</a>
