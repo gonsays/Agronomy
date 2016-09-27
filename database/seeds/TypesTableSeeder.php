@@ -12,19 +12,11 @@ class TypesTableSeeder extends Seeder
      */
     public function run()
     {
+        $source_directory = "./Products/";
+        $typesDirectoryArray = Storage::directories($source_directory);
 
-        $sourceDirectory = getcwd()."/database/seeds/Products";
-//        $destDirectory = "./public/images/products";
-        $folders = scandir($sourceDirectory);
-        $folders = array_diff($folders, array('.', '..'));
-
-//        if(!is_dir("./public/images")) mkdir(".public/images");
-//        if(!is_dir($destDirectory)) mkdir($destDirectory);
-
-        foreach ($folders as $typeName){
-//            $destTypeDir = "$destDirectory/$typeName";
-//            if(!is_dir($destTypeDir)) mkdir($destTypeDir);
-            Type::create(['name'=>ucwords($typeName)]);
+        foreach ($typesDirectoryArray as $typeDirectory){
+            Type::create(['name'=>ucwords(basename($typeDirectory))]);
         }
 
     }

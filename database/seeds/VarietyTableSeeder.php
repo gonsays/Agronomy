@@ -13,32 +13,29 @@ class VarietyTableSeeder extends Seeder
      */
     public function run()
     {
-        $source_directory = getcwd()."/database/seeds/Products/";
-        $destDirectory = "./images/products";
+        $source_directory = "./Products/";
+        $destDirectory = "./images";
 
-        $types_folders = scandir($source_directory);
-        $types_folders = array_diff($types_folders, array('.', '..'));
+        $typesDirectoryArray = Storage::directories($source_directory);
 
-        foreach ($types_folders as $typeName){
-            $typeDir ="$source_directory/$typeName";
-            $products = array_diff(scandir($typeDir), array('.', '..'));
+        foreach ($typesDirectoryArray as $typeDirectory){
+            $products = Storage::directories($typeDirectory);
 
-            foreach ($products as $productName){
-                $productObj = Product::where('name',ucwords($productName))->first();
-                $productDir =$typeDir . "/" . $productName;
-                $varieties = array_diff(scandir($productDir), array('.', '..'));
+            foreach ($products as $productDirectory){
+                $productObj = Product::where('name',ucwords(basename($productDirectory)))->first();
 
-                foreach ($varieties as $varietyName){
-                    $varietyDir = "$productDir/$varietyName";
-                    $destinationVarietyDirectory = "$destDirectory/$typeName/$productName/$varietyName";
+                $varietiesDirectory = Storage::files($productDirectory);
+
+                foreach ($varietiesDirectory as $varietyDirectory){
+
+                    $destinationVarietyDirectory = "$destDirectory/$varietyDirectory";
                     $variety = new Variety();
 
                     if(!Storage::exists($destinationVarietyDirectory))
-                        Storage::put($destinationVarietyDirectory, file_get_contents($varietyDir));
+                        Storage::copy($varietyDirectory,$destinationVarietyDirectory);
 
-                    $fileName = pathinfo($varietyName, PATHINFO_FILENAME);
-                    $variety->name = ucwords($fileName);
-                    $variety->image = "$destinationVarietyDirectory";
+                    $variety->name = ucwords(basename($varietyDirectory));
+                    $variety->image = $destinationVarietyDirectory;
                     $variety->product_id = $productObj->id;
                     $variety->save();
                 }
