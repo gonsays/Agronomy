@@ -14,24 +14,17 @@ class ProductsTableSeeder extends Seeder
     public function run()
     {
 
-        $directory = getcwd()."/database/seeds/Products";
-//        $destDirectory = "./public/images/products";
-        $types = scandir($directory);
-        $types = array_diff($types, array('.', '..'));
+        $source_directory = "./Products/";
+        $typesDirectoryArray = Storage::directories($source_directory);
 
 
-        foreach ($types as $typeName){
-            $typeObj = Type::where('name',ucwords($typeName))->first();
-            $typeDirectory = $directory ."/". $typeName;
-            $products = array_diff(scandir($typeDirectory), array('.', '..'));
+        foreach ($typesDirectoryArray as $typeDirectory){
+            $typeObj = Type::where('name',ucwords(basename($typeDirectory)))->first();
+            $productsDirectoryArray = Storage::directories($typeDirectory);
 
-            foreach ($products as $productName){
-
-//                $destProductDir = "$destDirectory/$typeName/$productName";
-//                if(!is_dir($destProductDir)) mkdir($destProductDir);
-
+            foreach ($productsDirectoryArray as $productDirectory){
                 $product = new Product();
-                $product->name=ucwords($productName);
+                $product->name=ucwords(basename($productDirectory));
                 $product->measurement_unit = "Kg";
                 $product->type()->associate($typeObj);
                 $product->save();
