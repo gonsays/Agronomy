@@ -34,7 +34,7 @@ class VarietyTableSeeder extends Seeder
                     if(!Storage::exists($destinationVarietyDirectory))
                         Storage::copy($varietyDirectory,$destinationVarietyDirectory);
 
-                    $variety->name = ucwords(basename($varietyDirectory));
+                    $variety->name = ucwords(pathinfo($varietyDirectory,PATHINFO_FILENAME));
                     $variety->image = $destinationVarietyDirectory;
                     $variety->product_id = $productObj->id;
                     $variety->save();
