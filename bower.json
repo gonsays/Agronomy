@@ -1,5 +1,5 @@
 {
-  "name": "Agronomy",
+  "name": "agronomy",
   "description": "Online B2B marketplace for agricultural produce",
   "main": "",
   "authors": [
@@ -17,6 +17,8 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "^3.3.6"
+    "bootstrap": "^3.3.6",
+    "foundation-sites": "^6.2.3",
+    "sweetalert": "^1.1.3"
   }
 }
