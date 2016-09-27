@@ -29,7 +29,7 @@
                         </div>
                     @endif
 
-                    <form action="{{ action('AuctionController@search') }}" method="post" class="text-center">
+                    <form action="{{ action('AuctionController@search',[],false) }}" method="post" class="text-center">
                         <div class="row">
                             <div class="columns small-3">
                                 <div class="input-group changethisone">
