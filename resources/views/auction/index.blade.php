@@ -10,9 +10,9 @@
                     <a href="{{URL::previous()}}" class="pill center btn btn-success">Go Back</a>
                 @endif
 
-                <ul class="small-block-grid-4">
+                <ul class="large-up-4">
                     @foreach($auctionList as $auction)
-                        <li>
+                        <li class="column">
                             <a href="{{ action('AuctionController@show',$auction->id) }}" class="item-box">
 
                                 <div class="image-box" style="background-image: url('{{ Storage::url($auction->variety->image) }}')"></div>

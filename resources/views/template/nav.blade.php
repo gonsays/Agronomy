@@ -4,7 +4,7 @@
         <div class="small-12 columns">
             <div>
                 <a class="logo" href="{{ url("/") }}"></a>
-                <div class="menu right">
+                <div class="menu float-right">
                     <a href="{{ action('AuctionController@index') }}" class="btn btn-default">Auctions</a>
 
                     @if(Auth::check())
