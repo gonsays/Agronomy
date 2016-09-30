@@ -104,7 +104,7 @@
   background: white;
   box-shadow: #4d4d4d 0 0 7px;
   min-height: 405px;
-  overflow: auto; }
+  overflow: visible; }
 
 .product-amount {
   width: 100%;
@@ -204,6 +204,25 @@ button[data-id=bid_amount] {
   .my-auctions-container .my-auction {
     border: 1px solid lightgrey;
     padding: 10px; }
+
+li.column {
+  list-style: none;
+  margin-bottom: 20px; }
+
+.overflow-auto {
+  overflow: auto !important; }
+
+.admin-varieties-list .admin-variety-item {
+  border: 1px solid lightgrey;
+  margin-bottom: 10px;
+  padding: 10px; }
+
+.admin-varieties-list .admin-varieties-details p {
+  margin: 0; }
+
+.admin-varieties-list .admin-varieties-details .btn-variety-edit {
+  border-radius: 30px;
+  border-color: transparent; }
 
 /*Email css*/
 

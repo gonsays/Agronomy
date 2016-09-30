@@ -1,20 +1,29 @@
-@foreach($products as $product)
-    <div class="product-container">
-        <div class="row">
+{{ $varieties->links() }}
+
+@foreach($varieties as $variety)
+    <div class="admin-varieties-list">
+        <div class="row admin-variety-item">
             <div class="small-3 columns">
                 <a href="#">
-                    <img src="#" alt="">
+                    <img src="{{ Storage::url($variety->image) }}" alt="">
+                    {{--{{ Html::image(Storage::url($variety->image),"",[],true) }}--}}
                 </a>
             </div>
-            <div class="small-9 columns">
+            <div class="small-9 columns admin-varieties-details">
 
-                    <h3>{{ $product->name }}</h3>
-                    <p>{{ $product->type }}</p>
-                    <p>{{ $product->created_at }}</p>
-                    <p>{{ $product->updated_at }}</p>
-                    <a href="{{ action("AdminPanelController@editProduct", $product->id) }}">Edit</a>
-
+                <div class="row">
+                    <div class="small-9 columns">
+                        <h3>{{ $variety->name }}</h3>
+                        <p>{{ $variety->product->name }} / {{ $variety->product->type->name }}</p>
+                        <p>Date Added: {{ $variety->created_at }}</p>
+                        <p>Date Updated: {{ $variety->updated_at }}</p>
+                    </div>
+                    <div class="small-3 columns">
+                        <a class="btn btn-lg btn-success btn-variety-edit" href="{{ action("AdminPanelController@editProduct", $variety->id) }}">Edit</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 @endforeach
+

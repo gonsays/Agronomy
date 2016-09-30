@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="columns small-8">
-                    <div class="product-details-container">
+                    <div class="product-details-container {{ !Auth::check() ? 'overflow-auto':'' }}">
 
                         @if($auction->status == "Closed")
                             <div class="alert alert-danger">This Auction has Ended</div>
@@ -141,7 +141,7 @@
                         </div>
 
 
-                        @if(Auth::user() != $auction->seller && $daysLeft>0)
+                        @if(Auth::user() != $auction->seller && $daysLeft>0 && Auth::check())
                         {{--Bidding Form--}}
                         <div class="bidding-container">
                             <form action="{{ action("BidController@store") }}" method="post" id="form_bid">
