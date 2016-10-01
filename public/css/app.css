@@ -2,146 +2,194 @@
   box-shadow: #bfbfbf 0 3px 5px;
   position: relative;
   z-index: 99;
-  margin-bottom: 20px; }
-  .nav-agronomy .logo {
-    width: 200px;
-    height: 55px;
-    display: inline-block;
-    background: url("/img/logo.png") no-repeat center/contain; }
-  .nav-agronomy .menu {
-    padding: 10px 0; }
-    .nav-agronomy .menu .btn {
-      border-radius: 20px;
-      border-color: transparent;
-      font-family: 'Open Sans', sans-serif;
-      margin-left: 10px; }
-      .nav-agronomy .menu .btn.btn-default {
-        background: #e6e6e6; }
-        .nav-agronomy .menu .btn.btn-default:hover {
-          background: #d9d9d9; }
+  margin-bottom: 20px;
+}
+
+.nav-agronomy .logo {
+  width: 200px;
+  height: 55px;
+  display: inline-block;
+  background: url("/img/logo.png") no-repeat center/contain;
+}
+
+.nav-agronomy .menu {
+  padding: 10px 0;
+}
+
+.nav-agronomy .menu .btn {
+  border-radius: 20px;
+  border-color: transparent;
+  font-family: 'Open Sans', sans-serif;
+  margin-left: 10px;
+}
+
+.nav-agronomy .menu .btn.btn-default {
+  background: #e6e6e6;
+}
+
+.nav-agronomy .menu .btn.btn-default:hover {
+  background: #d9d9d9;
+}
 
 .cover {
   background: url("/img/cover.png") no-repeat bottom/cover;
   height: 300px;
-  z-index: -999; }
-  .cover .cloud {
-    width: 300px;
-    height: 180px;
-    margin-top: 20px;
-    background: url("/img/cloud.png") no-repeat;
-    background-size: contain;
-    transform: rotate(-20deg); }
+  z-index: -999;
+}
+
+.cover .cloud {
+  width: 300px;
+  height: 180px;
+  margin-top: 20px;
+  background: url("/img/cloud.png") no-repeat;
+  background-size: contain;
+  transform: rotate(-20deg);
+}
 
 .container_search {
   box-shadow: #999999 0 -3px 10px;
   position: relative;
   z-index: 99;
   background: url("/img/pattern.jpg");
-  padding: 60px; }
-  .container_search .form-container {
-    background-color: #fff;
-    box-shadow: #cccccc 0 5px 5px;
-    padding: 50px; }
-  .container_search .btn {
-    width: 100%; }
+  padding: 60px;
+}
+
+.container_search .form-container {
+  background-color: #fff;
+  box-shadow: #cccccc 0 5px 5px;
+  padding: 50px;
+}
+
+.container_search .btn {
+  width: 100%;
+}
 
 @keyframes cloud-animate {
   from {
-    transform: rotate(0deg); }
+    transform: rotate(0deg);
+  }
+
   to {
-    transform: rotate(-20deg); } }
+    transform: rotate(-20deg);
+  }
+}
 
 *:not(i):not(.glyphicon) {
-  font-family: 'Lato', sans-serif !important; }
+  font-family: 'Lato', sans-serif !important;
+}
 
 .dark-shadow {
-  box-shadow: #1a1a1a 0 5px 5px; }
+  box-shadow: #1a1a1a 0 5px 5px;
+}
 
 .full-width {
-  width: 100%; }
+  width: 100%;
+}
 
 .remove-margin {
-  margin-top: -20px; }
+  margin-top: -20px;
+}
 
 .btn {
   margin: 0 5px;
   border-radius: 0;
-  transition: background .3s ease; }
+  transition: background .3s ease;
+}
 
 .form-control {
-  border-radius: 0; }
+  border-radius: 0;
+}
 
 .shadow {
-  box-shadow: #404040 0 1px 10px; }
+  box-shadow: #404040 0 1px 10px;
+}
 
 .login-container {
   margin-top: 150px;
   background: rgba(255, 255, 255, 0.8);
-  padding: 20px; }
+  padding: 20px;
+}
 
 .signup-container {
   margin-top: 100px;
   background: rgba(255, 255, 255, 0.8);
   padding: 20px;
-  margin-bottom: 150px; }
+  margin-bottom: 150px;
+}
 
 .danger {
-  color: darkred; }
+  color: darkred;
+}
 
 .form-control[readonly] {
-  background: white; }
+  background: white;
+}
 
 .pointer {
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 .auction-container {
   background: url("/img/Apples_background.jpg");
   padding: 20px;
-  background-size: contain; }
+  background-size: contain;
+}
 
-.product-image-container, .product-details-container {
+.product-image-container,
+.product-details-container {
   padding: 15px;
   background: white;
   box-shadow: #4d4d4d 0 0 7px;
   min-height: 405px;
-  overflow: visible; }
+  overflow: auto;
+}
 
 .product-amount {
   width: 100%;
   padding: 15px;
   border-radius: 3px;
-  font-weight: bold; }
-  .product-amount.base-price {
-    color: darkslategrey;
-    border: 1px solid darkgray; }
-  .product-amount.highest-bid {
-    color: white;
-    background: dodgerblue;
-    box-shadow: #b3b3b3 0 3px 2px; }
+  font-weight: bold;
+}
+
+.product-amount.base-price {
+  color: darkslategrey;
+  border: 1px solid darkgray;
+}
+
+.product-amount.highest-bid {
+  color: white;
+  background: dodgerblue;
+  box-shadow: #b3b3b3 0 3px 2px;
+}
 
 .bidding-container {
   width: 100%;
   padding: 20px 0;
   clear: both;
-  display: inline-block; }
+  display: inline-block;
+}
 
 button[data-id=bid_amount] {
-  padding: 15px; }
+  padding: 15px;
+}
 
 .btn-bid {
   border-radius: 3px;
   padding: 15px;
   width: 100%;
   border: none;
-  box-shadow: #b3b3b3 0 3px 1px; }
+  box-shadow: #b3b3b3 0 3px 1px;
+}
 
 .notification-big {
   font-size: 5em;
-  font-weight: 200; }
+  font-weight: 200;
+}
 
 .notification-med {
   font-size: 3em;
-  font-weight: 300; }
+  font-weight: 300;
+}
 
 .pill {
   border-radius: 300px;
@@ -150,13 +198,16 @@ button[data-id=bid_amount] {
   padding: 7px;
   width: 50%;
   display: block;
-  border: none; }
+  border: none;
+}
 
 .center {
-  margin: 0 auto; }
+  margin: 0 auto;
+}
 
 #input-custom-bid {
-  padding: 25px 16px; }
+  padding: 25px 16px;
+}
 
 .item-box {
   display: block;
@@ -164,77 +215,114 @@ button[data-id=bid_amount] {
   color: black;
   width: 100%;
   padding: 10px;
-  box-shadow: #ababab 0 1px 3px; }
-  .item-box:hover, .item-box:focus {
-    text-decoration: none;
-    color: black;
-    outline: none;
-    box-shadow: #7fc1d9 0 1px 3px; }
-  .item-box .image-box {
-    height: 200px;
-    background-size: cover; }
-  .item-box small {
-    display: block; }
-  .item-box h2 {
-    margin: 0;
-    width: 100%;
-    font-family: "Lato Black", sans-serif; }
+  box-shadow: #ababab 0 1px 3px;
+}
+
+.item-box:hover,
+.item-box:focus {
+  text-decoration: none;
+  color: black;
+  outline: none;
+  box-shadow: #7fc1d9 0 1px 3px;
+}
+
+.item-box .image-box {
+  height: 200px;
+  background-size: cover;
+}
+
+.item-box small {
+  display: block;
+}
+
+.item-box h2 {
+  margin: 0;
+  width: 100%;
+  font-family: "Lato Black", sans-serif;
+}
 
 .dropdown {
-  display: inline-block; }
-  .dropdown a:hover {
-    border-color: transparent !important; }
+  display: inline-block;
+}
+
+.dropdown a:hover {
+  border-color: transparent !important;
+}
 
 .nav-pills {
-  margin: 0; }
-  .nav-pills li a {
-    border-radius: 0;
-    background: #efefef;
-    transition: all .3s ease;
-    color: gray; }
-    .nav-pills li a:hover {
-      background-color: #e0e0e0; }
-  .nav-pills li:first-child a {
-    border-radius: 4px 0 0 4px; }
-  .nav-pills li:last-child a {
-    border-radius: 0 4px 4px 0; }
+  margin: 0;
+}
+
+.nav-pills li a {
+  border-radius: 0;
+  background: #efefef;
+  transition: all .3s ease;
+  color: gray;
+}
+
+.nav-pills li a:hover {
+  background-color: #e0e0e0;
+}
+
+.nav-pills li:first-child a {
+  border-radius: 4px 0 0 4px;
+}
+
+.nav-pills li:last-child a {
+  border-radius: 0 4px 4px 0;
+}
 
 .my-auctions-container {
-  margin-top: 20px; }
-  .my-auctions-container .my-auction {
-    border: 1px solid lightgrey;
-    padding: 10px; }
+  margin-top: 20px;
+}
+
+.my-auctions-container .my-auction {
+  border: 1px solid lightgrey;
+  padding: 10px;
+}
 
 li.column {
   list-style: none;
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+}
 
 .overflow-auto {
-  overflow: auto !important; }
+  overflow: auto !important;
+}
 
 .admin-varieties-list .admin-variety-item {
   border: 1px solid lightgrey;
   margin-bottom: 10px;
-  padding: 10px; }
+  padding: 10px;
+}
 
 .admin-varieties-list .admin-varieties-details p {
-  margin: 0; }
+  margin: 0;
+}
 
 .admin-varieties-list .admin-varieties-details .btn-variety-edit {
   border-radius: 30px;
-  border-color: transparent; }
+  border-color: transparent;
+}
+
+.btn-end-auction {
+  float: right;
+}
 
 /*Email css*/
-
 /*Email Css*/
+
 .sub {
   padding: 10px 20px;
   width: 200px;
-  height: 100px; }
-  .sub:first-child {
-    background-size: contain;
-    background: url("/img/logo.png") no-repeat; }
-  .sub:last-child {
-    float: right; }
+  height: 100px;
+}
 
-/*# sourceMappingURL=app.css.map */
+.sub:first-child {
+  background-size: contain;
+  background: url("/img/logo.png") no-repeat;
+}
+
+.sub:last-child {
+  float: right;
+}

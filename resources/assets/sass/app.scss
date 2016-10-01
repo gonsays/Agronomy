@@ -68,7 +68,7 @@
   background: white;
   box-shadow: lighten(black,30) 0 0 7px;
   min-height: 405px;
-  overflow: visible;
+  overflow: auto;
 }
 
 .product-amount{
@@ -242,5 +242,9 @@ li.column{
       border-color: transparent;
     }
   }
+}
+
+.btn-end-auction{
+  float: right;
 }
 /*Email css*/

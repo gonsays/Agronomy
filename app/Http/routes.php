@@ -31,6 +31,8 @@ Route::get('/home', 'HomeController@index');
 Route::get('/adminpanel/product/add',['as' => 'admin.product.add', 'uses' =>'AdminPanelController@home']);
 Route::get('/adminpanel/product/list',['as' => 'admin.product.list', 'uses' =>'AdminPanelController@productlist']);
 Route::get('/adminpanel/product/edit/{id}',['as' => 'admin.product.edit', 'uses' =>'AdminPanelController@editProduct']);
+Route::get('/adminpanel/reports',['uses' =>'AdminPanelController@reports']);
+Route::get('/adminpanel/transaction-reports',['uses' =>'AdminPanelController@transactionReports']);
 
 Route::get('varieties/getvarieties/{id?}','VarietyController@getVarieties');
 Route::resource('auctions', 'AuctionController');

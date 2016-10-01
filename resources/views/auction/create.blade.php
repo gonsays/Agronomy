@@ -61,11 +61,11 @@
                             <div class="form-group {{ $errors->has('variety_id') ?'has-errors':'' }}">
                                 <label for="variety_id">Variety</label>
 
-                                <select name="variety_id" id="variety_id" class="form-control selectpicker" data-live-search="true" {{$varieties?'disabled="disabled"':''}}>
+                                <select name="variety_id" id="variety_id" class="form-control selectpicker" data-live-search="true" {{Session::has('varieties')?'':'disabled="disabled"'}}>
                                     <option value="" >Please select a variety</option>
 
-                                    @if($varieties)
-                                        @foreach($varieties as $variety)
+                                    @if(Session::has('varieties'))
+                                        @foreach(Session::get('varieties') as $variety)
                                         <option value="{{$variety->id}}" {{ old('variety_id')==$variety->id?'selected':'' }}>{{$variety->name}}</option>
                                         @endforeach
                                     @endif
@@ -123,7 +123,7 @@
 
                                  <div class="input-group changethisone">
                                     <input type="text" name="location" class="form-control" id="location" value="{{ old('location') }}">
-                                    <span class="input-group-addon pointer" onclick="gelocation()">
+                                    <span class="input-group-addon pointer" onclick="getLocation()">
                                         <i class="glyphicon glyphicon-record "></i>
                                     </span>
                                 </div>

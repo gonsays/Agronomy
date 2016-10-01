@@ -8,6 +8,8 @@ use Auth;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Mail\Message;
+use Mail;
 use Response;
 
 class BidController extends Controller
@@ -53,7 +55,7 @@ class BidController extends Controller
         //validate input
         $this->validate($request,[
             'auction_id' => 'numeric|exists:auctions,id|required',
-            'bid_amount' => 'numeric|required|min:'.$auction->base_price
+            'bid_amount' => 'numeric|required|min:'.($auction->base_price+1)
         ]);
 
 
@@ -67,6 +69,12 @@ class BidController extends Controller
         $bid->status = "Open";
         $bid->bidder_id = $bidder->id;
         $bid->save();
+
+
+        Mail::raw('Congrats',  function (Message $message) use ($bidder) {
+            $message->from('support@agronomy.com', 'Agronomy');
+            $message->to($bidder->email)->subject('You have successfully placed a bid');
+        });
 
         return Response::json("Your bid was successfully placed");
     }

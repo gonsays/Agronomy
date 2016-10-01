@@ -5,6 +5,9 @@ namespace App\Console\Commands;
 use App\Auction;
 use DateTime;
 use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Mail\Message;
 use Mail;
 
 class CloseAuctionCommand extends Command
@@ -75,13 +78,13 @@ class CloseAuctionCommand extends Command
 
         $email = $winningBid->bidder->email;
 
-        Mail::send('emails.bid_win', $data, function ($message) use ($email) {
+        Mail::raw('Congrats', function (Message $message) use ($email) {
             $message->from('support@agronomy.com', 'Agronomy');
             $message->to($email)->subject('You have won the Bid');
         });
     }
 
-    private function sendConsolationMail($bids)
+    private function sendConsolationMail(Collection $bids)
     {
 
         $bidders = $bids->bidder->unique('email');
@@ -95,7 +98,7 @@ class CloseAuctionCommand extends Command
         foreach($bidders as $bidder){
             $data->bidder = $bidder;
 
-            Mail::send('emails.bid_win', $data, function ($message) use ($bidder) {
+            Mail::raw('You didnt Win', function (Message $message) use ($bidder) {
                 $message->from('support@agronomy.com', 'Agronomy');
                 $message->to($bidder->email)->subject('You have won the Bid');
             });

@@ -27,6 +27,8 @@
                         </li>
                     @endforeach
                 </ul>
+
+                {{ $auctionList->links() }}
             </div>
         </div>
     </div>

@@ -35,9 +35,16 @@
             var $data = $(this).serialize();
 
             $.post($formBid.attr('action'), $data).done(function (data) {
-                swal("Success!", data, "success")
+                swal("Success!",
+                        data, "success");
                 location.reload();
             })
+            .fail(function (data) {
+                var message = JSON.parse(data.responseText);
+
+
+                swal("Oops!", message.bid_amount[0], "error");
+            });
         })
     </script>
 
@@ -49,6 +56,53 @@
             var amount = $(this).val();
             $selectedOption.val(amount);
         });
+    </script>
+
+    <script type="text/javascript">
+        function endAuction(e) {
+            e.preventDefault();
+            swal({
+                title: "Are you sure?",
+                text: "The auction Will close if u choose to continue",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, end it!",
+                cancelButtonText: "No, cancel!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+                    function(isConfirm){
+                        if (isConfirm) {
+                            closeAuction(function () {
+                                swal("Ended!", "Your auction has ended!", "success");
+                                window.location.reload();
+                            });
+                            return true;
+                        } else {
+                            swal("Cancelled", "Your auction is still active", "error");
+                            return false;
+                        }
+            });
+        }
+    </script>
+
+    <script type="text/javascript">
+        function closeAuction(callback) {
+            $ = jQuery;
+
+            let url = "{{ action("AuctionController@destroy",$auction->id) }}";
+
+            $.post( url, { "_method":"DELETE" },function (data) {
+                console.log(data);
+            })
+                .done(function() {
+                    callback.call();
+                })
+                .fail(function() {
+                    swal("Oops!", "Something went wrong!", "error")
+                });
+        }
     </script>
 @stop
 
@@ -71,6 +125,10 @@
                         @endif
 
                         <div class="small-12 columns">
+                            @if($auction->status != "Closed" && Auth::user() == $auction->seller)
+                                <a href="#" class="btn btn-default btn-sm btn-end-auction" onclick="endAuction(event)">End Auction</a>
+                            @endif
+
                             <h3>{{ $auction->variety->name }}</h3>
                             <h5>{{ $auction->variety->product->name }}</h5>
                         </div>
@@ -168,13 +226,6 @@
                         </div>
                         @endif
 
-                        @if($daysLeft>0 && Auth::user() == $auction->seller)
-                        <div class="row">
-                            <div class="small-12 columns">
-                                <a href="#" class="btn btn-default btn-lg">End Auction</a>
-                            </div>
-                        </div>
-                        @endif
 
                     </div>
                 </div>

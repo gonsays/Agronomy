@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Auction;
 use App\Product;
+use App\User;
 use App\Variety;
 use Auth;
 //use DebugBar\DebugBar;
@@ -11,16 +12,12 @@ use DateTime;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Response;
+use Validator;
 
-//todo datepicker
-//todo location
-//todo add address table
-//todo add cursor to button
-//todo chnage readonly style
 
 class AuctionController extends Controller
 {
-
 
     public function __construct(){
 //        $this->middleware('auth');
@@ -32,7 +29,7 @@ class AuctionController extends Controller
      */
     public function index()
     {
-        $auctionList = Auction::where('bidding_end','>',(new DateTime())->format("Y-m-d"))->get();
+        $auctionList = Auction::where('status','Open')->paginate(12);
         return view('auction.index')->with('auctionList', $auctionList);
     }
 
@@ -41,14 +38,9 @@ class AuctionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
         $varieties = null;
-
-        if($request->has('product_id')) {
-            $product_id = $request->input('product_id');
-            $varieties = Product::find($product_id)->varieties()->get(['id', 'name']);
-        }
 
         $products = Product::all(['id','name']);
         return view('auction.create')->with('products', $products)->with('varieties',$varieties);
@@ -58,7 +50,7 @@ class AuctionController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -66,22 +58,31 @@ class AuctionController extends Controller
           'variety_id.integer' => "Please choose a variety"
         ];
 
-        $this->validate($request, [
-//            'variety_id' => 'integer|exists:varieties,id',
+
+        $validator = Validator::make($request->all(), [
             'quantity' => 'required|numeric|min:10',
             'base_price' => 'required|numeric|min:10',
             'location' => 'required|string',
             'bidding_end' => 'required|date_format:Y-m-d|after:today',
             'description' => 'required'
-        ],$messages);
+        ], $messages);
 
-/*        $imagePath = "/images/auctions/";
-        $imagesDirectory['products'] = base_path().$imagePath;
-        $files = $request->file('images');
+        $varieties = null;
 
-        foreach ($files as $file){
-            $file->move($imagesDirectory['products'],$file->getClientOriginalName());
-        }*/
+        if ($validator->fails()) {
+
+            if($request->has('product_id')) {
+                $product_id = $request->input('product_id');
+                $varieties = Product::find($product_id)->varieties()->get(['id', 'name']);
+            }
+
+            return redirect()
+                ->back()
+                ->with('varieties',$varieties)
+                ->withErrors($validator)
+                ->withInput();
+        }
+
 
         $auction = new Auction();
         $auction->variety_id = $request->get('variety_id');
@@ -92,8 +93,6 @@ class AuctionController extends Controller
         $auction->seller_id = Auth::id();
         $auction->quantity = $request->get("quantity");
         $auction->save();
-
-
 
         $request->session()->flash('status', 'Auction Successfully Created');
 
@@ -165,12 +164,24 @@ class AuctionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
+     * @internal param int $id
      */
     public function destroy($id)
     {
-        //
+
+//        $user = Auth::user();
+
+//        if(!$auction = $user->auctions()->find($id)){
+//            return abort(403 , Response::json('You do not have permission.'));
+//        }
+
+        $auction = Auction::find($id);
+        $auction->status = "Closed";
+        $auction->save();
+
+        return response("Success",200);
     }
 
     public function search(Request $request){
