@@ -21,7 +21,7 @@
                                     <b>{{ $auction->variety->name }} ({{ $auction->variety->product->name }})</b>
                                     <small>Sold By {{ $auction->seller->name }}</small>
                                     <h4>Rs.{{ $auction->base_price }}</h4>
-                                    <h2  class="btn btn-md btn-success">View Item</h2>
+                                    <h2  class="btn btn-md btn-view-item">View Item</h2>
                                 </div>
                             </a>
                         </li>

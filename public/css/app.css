@@ -1,5 +1,5 @@
 .nav-agronomy {
-  box-shadow: #bfbfbf 0 3px 5px;
+  box-shadow: #4d4d4d 0 2px 5px;
   position: relative;
   z-index: 99;
   margin-bottom: 20px;
@@ -47,21 +47,40 @@
 }
 
 .container_search {
-  box-shadow: #999999 0 -3px 10px;
   position: relative;
-  z-index: 99;
-  background: url("/img/pattern.jpg");
-  padding: 60px;
+  margin-top: -360px;
+  z-index: 999;
 }
 
 .container_search .form-container {
-  background-color: #fff;
-  box-shadow: #cccccc 0 5px 5px;
-  padding: 50px;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 13px;
+}
+
+.container_search .form-container h1 {
+  margin-bottom: 30px;
+  color: #0ebe70;
 }
 
 .container_search .btn {
   width: 100%;
+}
+
+.background-image {
+  margin-top: 155px;
+  padding: 50px 0;
+}
+
+.background-image .container {
+  padding: 20px 0;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.background-image .container h1 {
+  margin-left: 30px;
+  color: #3bab93;
 }
 
 @keyframes cloud-animate {
@@ -75,7 +94,7 @@
 }
 
 *:not(i):not(.glyphicon) {
-  font-family: 'Lato', sans-serif !important;
+  font-family: 'Lato', sans-serif;
 }
 
 .dark-shadow {
@@ -90,10 +109,25 @@
   margin-top: -20px;
 }
 
+h1.font-handwritten {
+  font-family: 'Pacifico', cursive !important;
+}
+
 .btn {
   margin: 0 5px;
   border-radius: 0;
   transition: background .3s ease;
+}
+
+.btn-view-item {
+  color: white;
+  background-color: #15ad90;
+  border-color: #12967d;
+}
+
+.btn-view-item:hover {
+  color: white;
+  background-color: #12967d;
 }
 
 .form-control {
@@ -101,7 +135,7 @@
 }
 
 .shadow {
-  box-shadow: #404040 0 1px 10px;
+  box-shadow: #070707 0 0px 11px -1px;
 }
 
 .login-container {
@@ -215,6 +249,7 @@ button[data-id=bid_amount] {
   color: black;
   width: 100%;
   padding: 10px;
+  background: rgba(255, 255, 255, 0.6);
   box-shadow: #ababab 0 1px 3px;
 }
 
@@ -323,7 +358,7 @@ li.column {
   text-align: center !important;
 }
 
-/*Email css*/
+/*Slider css*/
 /*Email Css*/
 
 .sub {

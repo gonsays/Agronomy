@@ -11,6 +11,7 @@
 |
 */
 
+use App\Auction;
 use App\Product;
 
 Route::get('/', function () {
@@ -18,12 +19,17 @@ Route::get('/', function () {
 
     try{
         $varieties = Product::first()->varieties->pluck('name','id');
+        $topAuctions = Auction::all()->sortBy('created_at')->take(8);
     }
     catch(Exception $e){
-        $varieties = null;
+        $varieties = [];
+        $topAuctions = [];
     }
 
-    return view('welcome')->with('products',$products)->with('varieties',$varieties);
+    return view('welcome')->with('products',$products)
+        ->with('varieties',$varieties)
+        ->with('topAuctions',$topAuctions)
+        ;
 });
 
 Route::auth();

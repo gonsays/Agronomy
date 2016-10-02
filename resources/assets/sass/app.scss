@@ -2,7 +2,7 @@
 @import "homepage";
 
 *:not(i):not(.glyphicon){
-  font-family: 'Lato', sans-serif !important;
+  font-family: 'Lato', sans-serif ;
 }
 
 .dark-shadow{
@@ -17,10 +17,26 @@
   margin-top: -20px;
 }
 
+h1.font-handwritten{
+  font-family: 'Pacifico', cursive !important;
+}
+
 .btn{
   margin: 0 5px;
   border-radius: 0;
   transition: background .3s ease;
+}
+
+.btn-view-item{
+  color: white;
+  background-color: $view-item;
+  border-color: darken($view-item,5);
+
+  &:hover{
+    color: white;
+    background-color: darken($view-item,5);
+  }
+
 }
 
 .form-control{
@@ -28,7 +44,7 @@
 }
 
 .shadow{
-  box-shadow: #404040 0 1px 10px
+  box-shadow: #070707 0 0px 11px -1px
 }
 
 .login-container{
@@ -146,6 +162,7 @@ button[data-id=bid_amount]{
   color: black;
   width: 100%;
   padding: 10px;
+  background: transparentize(white,.4);
   box-shadow: #ababab 0 1px 3px;
 
   &:hover, &:focus{
@@ -260,4 +277,10 @@ li.column{
 .table-bids th, .table-bids{
   text-align: center !important;
 }
-/*Email css*/
+
+
+/*Slider css*/
+#slider{
+  //border: 2px solid transparentize(white,.4);
+  //position: absolute;
+}
