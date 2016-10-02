@@ -257,21 +257,20 @@
                     @endif
                 </div>
 
-                <div class="small-6 columns">
+                <div class="small-12 columns">
 
                     @if($bids->isEmpty())
                         <h1 class="notification-med">No Bids Yet</h1>
                         <hr>
                     @else
-                        <h1>Top Bids</h1>
+                        <h1 class="header-top-bids">Top Bids</h1>
                         <hr>
-                        <table class="table">
+                        <table class="table table-bids">
                             <thead>
                             <tr>
                                 <th>Bidder</th>
                                 <th>Amount</th>
                                 <th>Date</th>
-                                <th></th>
                             </tr>
                             </thead>
 
