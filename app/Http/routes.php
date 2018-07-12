@@ -33,7 +33,8 @@ Route::get('/', function () {
 });
 
 Route::auth();
-Route::get('/home', 'HomeController@index');
+#Route::get('/home', 'HomeController@index');
+Route::get('/', 'HomeController@index');
 Route::get('/adminpanel/product/add',['as' => 'admin.product.add', 'uses' =>'AdminPanelController@home']);
 Route::get('/adminpanel/product/list',['as' => 'admin.product.list', 'uses' =>'AdminPanelController@productlist']);
 Route::get('/adminpanel/product/edit/{id}',['as' => 'admin.product.edit', 'uses' =>'AdminPanelController@editProduct']);
